@@ -1,0 +1,29 @@
+<% title 'Home' %>
+  	
+<h1>Kiji <small>Read the news. <%= render 'about' %></small></h1>
+
+<%= render 'top_three' %>
+
+<table>
+	<thead>
+		<tr>
+			<th><%= sortable 'zscore', "Rank" %></th>
+			<th><%= sortable 'title' %></th>
+			<th><%= sortable 'source' %></th>
+		</tr>
+	</thead>
+	<tbody>
+	<% @articles.each do |article| %>
+		<tr>
+			<td><%= article.zscore %></td>
+			<td>
+				<span data-tooltip class="has-tip" title='<%= "Facebook likes: #{article.likes} - Tweets: #{article.tweets}" %>' >
+					<%= link_to "#{article.title}", article.url %>
+				</span>
+			</td>
+			<td><%= article.source %></td>
+		</tr>
+	<% end %>
+	</tbody>
+</table>
+<%= will_paginate @articles, renderer: FoundationPagination::Rails %>
