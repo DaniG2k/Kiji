@@ -5,7 +5,10 @@ namespace :scrape do
   require 'feedzirra'
   
   desc "Run all scrape tasks"
-  task :all => [:bbc, :nyt, :jt] #:zscore
+  task :all => [:bbc,
+                :nyt,
+                :jt,
+                :guardian_all]
   
   # Gather RSS feed and run FQL and Twitter queries on those urls
   # Returns a visited hash
