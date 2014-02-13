@@ -39,6 +39,9 @@ end
 gem 'pg'
 gem 'mechanize'
 gem 'feedzirra'
+gem 'capybara'
+gem 'capybara-screenshot'
+gem 'poltergeist'
 gem 'foundation-rails'
 gem 'will_paginate-foundation'
 
