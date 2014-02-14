@@ -5,19 +5,19 @@
     </div>
 	<div class="large-4 columns">
     	<%= link_to( image_tag("screenshots/screenshot-0.png"), @first.url ) %>
-    	<h4><%= link_to @first.title, @first.url %></h4>
+    	<h4><%= link_to "#{@first.title} - #{@first.source}", @first.url %></h4>
     	<p>Bacon ipsum dolor sit amet nulla ham qui sint exercitation eiusmod commodo, chuck duis velit.</p>
 	</div>
     
     <div class="large-4 columns">
     	<%= link_to( image_tag("screenshots/screenshot-1.png"), @second.url ) %>
-    	<h4><%= link_to @second.title, @second.url %></h4>
+    	<h4><%= link_to "#{@second.title} - #{@second.source}", @second.url %></h4>
     	<p>Bacon ipsum dolor sit amet nulla ham qui sint exercitation eiusmod commodo, chuck duis velit.</p>
     </div>
     
     <div class="large-4 columns">
     	<%= link_to( image_tag("screenshots/screenshot-2.png"), @third.url ) %>
-    	<h4><%= link_to @third.title, @third.url  %></h4>
+    	<h4><%= link_to "#{@third.title} - #{@third.source}", @third.url  %></h4>
     	<p>Bacon ipsum dolor sit amet nulla ham qui sint exercitation eiusmod commodo, chuck duis velit.</p>
     </div>
 </div>
