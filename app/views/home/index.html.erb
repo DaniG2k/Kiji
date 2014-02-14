@@ -7,7 +7,7 @@
 <table>
 	<thead>
 		<tr>
-			<th><%= sortable 'zscore', "Rank" %></th>
+			<th><%= sortable 'val', "Rank" %></th>
 			<th><%= sortable 'title' %></th>
 			<th><%= sortable 'source' %></th>
 		</tr>
@@ -15,7 +15,7 @@
 	<tbody>
 	<% @articles.each do |article| %>
 		<tr>
-			<td><%= article.zscore %></td>
+			<td><%= article.val %></td>
 			<td>
 				<span data-tooltip class="has-tip" title='<%= "Facebook likes: #{article.likes} - Tweets: #{article.tweets}" %>' >
 					<%= link_to "#{article.title}", article.url %>
