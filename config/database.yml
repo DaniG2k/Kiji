@@ -4,7 +4,7 @@
 #   Ensure the SQLite 3 gem is defined in your Gemfile
 #   gem 'sqlite3'
 login: &login
-  username: dani
+  username: Shinobi
   password: moggi1nfame
   
 default: &default

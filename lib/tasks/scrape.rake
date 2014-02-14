@@ -8,6 +8,8 @@ namespace :scrape do
   task :all => [:bbc,
                 :nyt,
                 :jt,
+                :jdp,
+                :chosun,
                 :guardian_all]
   
   # Gather RSS feed and run FQL and Twitter queries on those urls
@@ -23,9 +25,9 @@ namespace :scrape do
     visited = {}
     unvisited = []
     feed.entries.each do |entry|
-      puts "Visiting #{entry.url}"
       begin
         url = get_matching_url(entry, regexes)
+        puts "Visiting #{url}"
         visited[url] = {}
         visited[url][:source] = format_source(feed.title)
         visited[url][:title] = entry.title
@@ -37,6 +39,7 @@ namespace :scrape do
         next
       end
     end
+    sleep 5 # Give Twitter and Facebook a break! :D
     visited
   end
   
