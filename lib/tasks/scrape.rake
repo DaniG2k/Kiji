@@ -26,6 +26,7 @@ namespace :scrape do
     unvisited = []
     feed.entries.each do |entry|
       begin
+        next unless entry.published.today?
         url = get_matching_url(entry, regexes)
         puts "Visiting #{url}"
         visited[url] = {}
