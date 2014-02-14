@@ -20,5 +20,8 @@
 # Learn more: http://github.com/javan/whenever
 every :day, :at => '5:30 am' do
   rake 'scrape:all'
+end
+
+every :day, :at => '5:40 am' do
   rake 'zscore'
 end

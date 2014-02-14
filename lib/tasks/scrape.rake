@@ -27,7 +27,7 @@ namespace :scrape do
       begin
         url = get_matching_url(entry, regexes)
         visited[url] = {}
-        visited[url][:source] = feed.title
+        visited[url][:source] = format_source(feed.title)
         visited[url][:title] = entry.title
         visited[url][:likes] = get_likes(url)
         visited[url][:tweets] = get_tweets(url)
@@ -38,6 +38,21 @@ namespace :scrape do
       end
     end
     visited
+  end
+  
+  def format_source(src)
+    case src.downcase.strip
+    when "nyt > asia pacific"
+      "New York Times - Asia Pacific"
+    when "the japan times: news & business"
+      "The Japan Times"
+    when "world news : asia pacific roundup | theguardian.com"
+      "The Guardian - Asia Pacific"
+    when "world news: china | theguardian.com"
+      "The Guardian - China"
+    else
+      src
+    end
   end
   
   def get_matching_url(entry, regexes)

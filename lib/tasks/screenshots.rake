@@ -9,14 +9,14 @@ namespace :scrape do
     Capybara.register_driver :poltergeist do |app|
       Capybara::Poltergeist::Driver.new(app, :js_errors => false)
     end
-    path = File.join(Rails.root, 'app', 'assets', 'images', 'screenshots')
-    Capybara.save_and_open_page_path = path
+    #path = File.join(Rails.root, 'app', 'assets', 'images', 'screenshots')
+    #Capybara.save_and_open_page_path = path
     
     articles = Article.order('zscore DESC').limit(3)
     
-    articles.each do |article|
+    articles.each_with_index do |article, i|
       visit(article.url)
-      screenshot_and_open_image
+      save_screenshot(File.join(Rails.root, 'app', 'assets', 'images', 'screenshots', "screenshot-#{i}.png"))
     end
   end
 end
