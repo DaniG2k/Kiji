@@ -1,7 +1,15 @@
 class HomeController < ApplicationController
   helper_method :sort_column, :sort_direction
   def index
-    @articles = Article.order("#{sort_column} #{sort_direction}").paginate(page: params[:page])
+    articles = Article.order('val DESC')
+    @first = articles.shift
+    @second = articles.shift
+    @third = articles.shift
+    @articles =  Article
+                  .where
+                  .not(id: [@first.id, @second.id, @third.id])
+                  .order("#{sort_column} #{sort_direction}")
+                  .paginate(page: params[:page])
   end
   
   private
