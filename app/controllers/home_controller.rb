@@ -7,7 +7,7 @@ class HomeController < ApplicationController
   private
   
   def sort_column
-    %w(zscore title source).include?(params[:sort]) ? params[:sort] : 'zscore'
+    %w(val title source).include?(params[:sort]) ? params[:sort] : 'val'
   end
   
   def sort_direction

@@ -14,7 +14,7 @@ task :zscore => :environment do
     
     z.each_with_index do |z_elt, i|
       a = Article.find_by(:url => urls[i])
-      a.zscore = z_elt
+      a.val = z_elt
       a.save
     end
   end
