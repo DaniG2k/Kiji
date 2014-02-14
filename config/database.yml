@@ -15,6 +15,7 @@ default: &default
   
 development:
   <<: *default
+  <<: *login
   host: localhost
   database: kiji_dev
   
@@ -23,8 +24,10 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
+  <<: *login
   database: kiji_test
     
 production:
   <<: *default
+  <<: *login
   database: kiji_prod
