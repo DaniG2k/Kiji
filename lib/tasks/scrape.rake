@@ -23,12 +23,12 @@ namespace :scrape do
   def fetch_rss_data(rss, regexes)
     feed = Feedzirra::Feed.fetch_and_parse(rss)
     visited = {}
-    unvisited = []
+    #unvisited = []
     feed.entries.each do |entry|
       begin
         next unless entry.published.today?
         url = get_matching_url(entry, regexes)
-        puts "Visiting #{url}"
+        puts "Querying #{url}"
         visited[url] = {}
         visited[url][:source] = format_source(feed.title)
         visited[url][:title] = entry.title
@@ -36,7 +36,7 @@ namespace :scrape do
         visited[url][:tweets] = get_tweets(url)
       rescue NoMethodError
         puts "\nNo matchdata found for #{entry.url}"
-        unvisited << entry.url
+        #unvisited << entry.url
         next
       end
     end

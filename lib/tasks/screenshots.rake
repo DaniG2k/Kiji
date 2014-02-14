@@ -11,7 +11,7 @@ namespace :scrape do
     end
     #path = File.join(Rails.root, 'app', 'assets', 'images', 'screenshots')
     #Capybara.save_and_open_page_path = path
-    
+    puts 'Getting screenshots'
     articles = Article.order('val DESC').limit(3)
     
     articles.each_with_index do |article, i|
