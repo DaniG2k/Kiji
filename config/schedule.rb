@@ -18,10 +18,6 @@
 # end
 
 # Learn more: http://github.com/javan/whenever
-every :day, :at => '5:30 am' do
-  rake 'scrape:all'
-end
-
-every :day, :at => '5:40 am' do
-  rake 'zscore'
+every :day, :at => '6:00 am' do
+  command 'RAILS_ENV=production rake scrape:all && RAILS_ENV=production rake zscore && RAILS_ENV=production rake scrape:screenshots'
 end
