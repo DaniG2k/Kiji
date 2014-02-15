@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140214010842) do
+ActiveRecord::Schema.define(version: 20140215233659) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(version: 20140214010842) do
     t.datetime "updated_at"
     t.string   "source"
     t.integer  "tweets"
-    t.integer  "rank"
+    t.integer  "raw_score"
     t.decimal  "val"
   end
 

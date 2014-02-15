@@ -1,4 +1,4 @@
-desc "Compute the zscore for raw values in rank colum"
+desc "Compute the zscore for raw scores"
 task :zscore => :environment do
   require 'statistics'
   puts "Computing zscore for"
@@ -8,13 +8,16 @@ task :zscore => :environment do
     articles = Article.where(:source => src)
     puts "\t#{src}"
     urls = articles.pluck(:url)
-    x = articles.pluck(:rank)
+    x = articles.pluck(:raw_score)
     
-    z = x.zscore
+    # Check if there's not enough data to calculate zscore.
+    # If there's a single raw score, make that into a float and
+    # place inside an array. Else, compute the zscore.
+    zscores = x.length == 1 ? [0.to_f] : x.zscore
     
-    z.each_with_index do |z_elt, i|
+    zscores.each_with_index do |score, i|
       a = Article.find_by(:url => urls[i])
-      a.val = z_elt
+      a.val = score
       a.save
     end
   end

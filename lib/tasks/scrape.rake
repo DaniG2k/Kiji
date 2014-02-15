@@ -40,7 +40,6 @@ namespace :scrape do
         next
       end
     end
-    sleep 5 # Give Twitter and Facebook a break! :D
     visited
   end
   
@@ -72,7 +71,9 @@ namespace :scrape do
       q = "select total_count from link_stat where url='#{url}'"
       fbreq = URI.escape("https://api.facebook.com/method/fql.query?query=#{q}&format=json")
       #puts "\nFacebook query: #{fbreq}"
-      JSON.parse(open(fbreq).read).first['total_count']
+      likes = JSON.parse(open(fbreq).read).first['total_count']
+      puts "\tLikes: #{likes}"
+      likes
     rescue
       puts "Error occurred at get_likes"
       puts "Twitter request: #{fbreq}"
@@ -83,7 +84,9 @@ namespace :scrape do
     begin
       twreq = URI.escape("http://urls.api.twitter.com/1/urls/count.json?url=#{url}")
       #puts "\nTwitter query: #{twreq}"
-      JSON.parse(open(twreq).read)['count']
+      tweets = JSON.parse(open(twreq).read)['count']
+      puts "\tTweets: #{tweets}"
+      tweets
     rescue
       puts "Error occurred at get_tweets"
       puts "Twitter request: #{twreq}"
@@ -91,17 +94,20 @@ namespace :scrape do
   end
   
   def add_to_db(visited)
-    puts "Adding data to the database"
-    visited.each do |key, val|
-      #puts "#{key} #{val}"
-      article = Article.find_or_initialize_by(:url => key)
-      article.update(
-        source: val[:source],
-        title: val[:title],
-        likes: val[:likes],
-        tweets: val[:tweets],
-        rank: val[:likes] + val[:tweets])
-      article.save
+    # Only add to database if links were visited.
+    if visited.present?
+      puts "Adding data to the database"
+      visited.each do |key, val|
+        #puts "#{key} #{val}"
+        article = Article.find_or_initialize_by(:url => key)
+        article.update(
+          source: val[:source],
+          title: val[:title],
+          likes: val[:likes],
+          tweets: val[:tweets],
+          raw_score: val[:likes] + val[:tweets])
+        article.save
+      end
     end
   end
 end
