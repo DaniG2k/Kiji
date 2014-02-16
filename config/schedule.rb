@@ -31,6 +31,6 @@ screenshots = "#{env} rake scrape:screenshots"
 precompile = "#{env} rake assets:precompile"
 nginx_recache = 'touch /home/dani/Kiji/tmp/restart.txt'
 
-every 5.hours do
+every 6.hours do
   command [chdir, all, zscore, clobber, screenshots, precompile, nginx_recache].join(' && ')
 end
