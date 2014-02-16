@@ -5,11 +5,8 @@ class HomeController < ApplicationController
     @first = articles.shift
     @second = articles.shift
     @third = articles.shift
-    @articles =  Article
-                  .where
-                  .not(id: [@first.id, @second.id, @third.id])
-                  .order("#{sort_column} #{sort_direction}")
-                  .paginate(page: params[:page])
+    @articles =  Article.where.not(id: [@first.id, @second.id, @third.id])
+                .order("#{sort_column} #{sort_direction}").paginate(page: params[:page])
   end
   
   private
