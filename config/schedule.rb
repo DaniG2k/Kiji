@@ -18,6 +18,16 @@
 # end
 
 # Learn more: http://github.com/javan/whenever
+env  = 'RAILS_ENV=production'
+all = "#{env} rake scrape:all"
+zscore = "#{env} rake zscore"
+clobber = "#{env} rake assets:clobber"
+rmscreenshots = 'rm -f /home/dani/Kiji/app/assets/images/screenshots/*'
+screenshots = "#{env} rake scrape:screenshots"
+precompile = "#{env} rake assets:precompile"
+nginx_recache = 'touch /home/dani/Kiji/tmp/restart.txt'
+
+
 every :day, :at => '9:00 am' do
-  command 'rake scrape:all && rake zscore && rake assets:clobber && rm -f /home/dani/Kiji/app/assets/images/screenshots/* && rake scrape:screenshots && rake assets:precompile && touch /home/dani/Kiji/tmp/restart.txt'
+  command [all, zscore, clobber, rmscreenshots, screenshots, precompile, nginx_recache].join(' && ')
 end
