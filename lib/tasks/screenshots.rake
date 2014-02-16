@@ -19,7 +19,7 @@ namespace :scrape do
       File.delete(img) if File.exist?(img)
     end
         
-    puts 'Getting screenshots'
+    puts 'Getting new screenshots'
     articles = Article.order('val DESC').limit(3)
     
     articles.each_with_index do |article, i|
