@@ -18,6 +18,6 @@
 # end
 
 # Learn more: http://github.com/javan/whenever
-every :day, :at => '6:00 am' do
-  command 'RAILS_ENV=production rake scrape:all && RAILS_ENV=production rake zscore && RAILS_ENV=production rake scrape:screenshots'
+every :day, :at => '9:00 am' do
+  command 'rake scrape:all && rake zscore && rake assets:clobber && rm -f /home/dani/Kiji/app/assets/images/screenshots/* && rake scrape:screenshots && rake assets:precompile && touch /home/dani/Kiji/tmp/restart.txt'
 end
