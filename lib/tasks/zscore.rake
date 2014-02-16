@@ -11,9 +11,9 @@ task :zscore => :environment do
     x = articles.pluck(:raw_score)
     
     # Check if there's not enough data to calculate zscore.
-    # If there's a single raw score, make that into a float and
+    # If there's a single raw score, lower default value and
     # place inside an array. Else, compute the zscore.
-    zscores = x.length == 1 ? [0.to_f] : x.zscore
+    zscores = x.length == 1 ? [-1.0] : x.zscore
     
     zscores.each_with_index do |score, i|
       a = Article.find_by(:url => urls[i])

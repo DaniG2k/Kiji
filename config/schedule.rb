@@ -18,6 +18,12 @@
 # end
 
 # Learn more: http://github.com/javan/whenever
+
+set :output, {
+              :error => "#{File.join(Rails.root, 'log', 'whenever_error.log')}",
+              :standard => "#{File.join(Rails.root, 'log', 'whenever_cron.log')}"
+             }
+
 env  = 'RAILS_ENV=production'
 all = "#{env} rake scrape:all"
 zscore = "#{env} rake zscore"
@@ -27,7 +33,6 @@ screenshots = "#{env} rake scrape:screenshots"
 precompile = "#{env} rake assets:precompile"
 nginx_recache = 'touch /home/dani/Kiji/tmp/restart.txt'
 
-
-every :day, :at => '9:00 am' do
+every 5.hours do
   command [all, zscore, clobber, rmscreenshots, screenshots, precompile, nginx_recache].join(' && ')
 end
