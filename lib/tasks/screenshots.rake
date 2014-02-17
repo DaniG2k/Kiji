@@ -25,6 +25,7 @@ namespace :scrape do
     articles.each_with_index do |article, i|
       visit(article.url)
       save_screenshot(File.join(screenshot_dir, "screenshot-#{i}.png"))
+      sleep 5
     end
   end
 end
