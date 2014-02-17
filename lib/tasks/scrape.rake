@@ -59,7 +59,7 @@ namespace :scrape do
     when "Hong Kong feed"
       "South China Morning Post - HK"
     when "China feed"
-      "South China Morning Post - China"
+      "South China Morning Post"
     else
       src
     end
