@@ -37,6 +37,7 @@ group :production do
 end
 
 gem 'pg'
+gem 'pry'
 gem 'whenever', :require => false
 gem 'mechanize'
 gem 'feedzirra'

@@ -54,11 +54,11 @@ namespace :scrape do
       "The Guardian - Asia Pacific"
     when "world news: china | theguardian.com"
       "The Guardian - China"
-    when "Asia feed"
+    when "asia feed"
       "South China Morning Post - Asia"
-    when "Hong Kong feed"
+    when "hong kong feed"
       "South China Morning Post - HK"
-    when "China feed"
+    when "china feed"
       "South China Morning Post"
     else
       src
