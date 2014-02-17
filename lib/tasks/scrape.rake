@@ -10,7 +10,8 @@ namespace :scrape do
                 :jt,
                 :jdp,
                 :chosun,
-                :guardian_all]
+                :guardian_all,
+                'south_china_mp:all']
   
   # Gather RSS feed and run FQL and Twitter queries on those urls
   # Returns a visited hash
