@@ -29,7 +29,7 @@ zscore = "#{env} rake zscore"
 clobber = "#{env} rake assets:clobber"
 screenshots = "#{env} rake scrape:screenshots"
 precompile = "#{env} rake assets:precompile"
-nginx_recache = 'touch #{Whenever.path}/tmp/restart.txt'
+nginx_recache = "touch #{Whenever.path}/tmp/restart.txt"
 
 every 8.hours do
   command [chdir, all, zscore, clobber, screenshots, precompile, nginx_recache].join(' && ')
