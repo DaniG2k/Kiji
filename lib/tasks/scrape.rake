@@ -93,7 +93,7 @@ namespace :scrape do
       likes = JSON.parse(open(fbreq).read)
       likes
     rescue
-      puts "Error occurred at get_likes"
+      puts "Error occurred at get_likes method."
     end
   end
   
@@ -105,7 +105,7 @@ namespace :scrape do
       puts "\tTweets: #{tweets}"
       tweets
     rescue
-      puts "Error occurred at get_tweets"
+      puts "Error occurred at get_tweets method."
       puts "Twitter request: #{twreq}"
     end
   end
