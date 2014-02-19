@@ -13,8 +13,8 @@ class HomeController < ApplicationController
     @third = top_three.shift
     
     @today_articles = @today_articles.where.not(id: [@first.id, @second.id, @third.id])
-                .order("#{sort_column} #{sort_direction}").paginate(page: params[:page])
-                
+                .order("#{sort_column} #{sort_direction}")
+                .paginate(page: params[:page], :per_page => 10)
     @yesterday_articles = Article.where(:created_at => yesterday_range).order('val DESC')
     @week_articles = Article.where(:created_at => week_range).order('val DESC')
     @month_articles = Article.where(:created_at => month_range).order('val DESC')

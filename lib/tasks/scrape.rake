@@ -25,6 +25,10 @@ namespace :scrape do
     feed = Feedzirra::Feed.fetch_and_parse(rss)
     visited = {}
     #unvisited = []
+    
+    # We need this for a batch request to Facebook
+    urls = Array.new
+    
     feed.entries.each do |entry|
       begin
         next unless entry.published.today?
@@ -33,14 +37,22 @@ namespace :scrape do
         visited[url] = {}
         visited[url][:source] = format_source(feed.title)
         visited[url][:title] = entry.title
-        visited[url][:likes] = get_likes(url)
         visited[url][:tweets] = get_tweets(url)
+        urls << url
       rescue NoMethodError
         puts "\nNo matchdata found for #{entry.url}"
         #unvisited << entry.url
         next
       end
     end
+    
+    # Process Facebook likes in batch
+    likes = get_likes(urls)
+    likes['data'].each do |fb|
+      url = fb['url']
+      visited[url][:likes] = fb['total_count']
+    end
+    
     visited
   end
   
@@ -73,17 +85,15 @@ namespace :scrape do
     matches[1..-1].compact.shift
   end
   
-  def get_likes(url)
+  def get_likes(urls)
     begin
-      q = "select total_count from link_stat where url='#{url}'"
-      fbreq = URI.escape("https://api.facebook.com/method/fql.query?query=#{q}&format=json")
-      #puts "\nFacebook query: #{fbreq}"
-      likes = JSON.parse(open(fbreq).read).first['total_count']
-      puts "\tLikes: #{likes}"
+      urls_str = urls.join("','")
+      q = "select url, total_count from link_stat where url in ('#{urls_str}')"
+      fbreq = URI.escape("https://graph.facebook.com/fql?q=#{q}")
+      likes = JSON.parse(open(fbreq).read)
       likes
     rescue
       puts "Error occurred at get_likes"
-      puts "Twitter request: #{fbreq}"
     end
   end
   
