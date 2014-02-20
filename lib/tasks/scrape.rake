@@ -72,6 +72,8 @@ namespace :scrape do
       "South China Morning Post - HK"
     when "china feed"
       "South China Morning Post"
+    when "cnn.com - asia"
+      "CNN - Asia"
     else
       src
     end
