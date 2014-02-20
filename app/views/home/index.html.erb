@@ -4,7 +4,8 @@
 <hr />
 <%= render 'top_three' %>
 
-<%= link_to "Yesterday's articles", yesterday_path, class: "button tiny radius" %>
-
 <%= render 'article_list', :articles => @today_articles %>
 <%= will_paginate @today_articles, renderer: FoundationPagination::Rails %>
+
+<hr />
+<%= render 'buttons' %>

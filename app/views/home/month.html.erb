@@ -1,0 +1,10 @@
+<% title "This month's top articles" %>
+
+<h1><%= t 'title' %> <small>Read the news. <%= render 'about' %></small></h1>
+<hr />
+
+<%= render 'article_list', :articles => @month_articles %>
+<%= will_paginate @month_articles, renderer: FoundationPagination::Rails %>
+
+<hr />
+<%= render 'buttons' %>

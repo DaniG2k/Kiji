@@ -1,5 +1,8 @@
 Kiji::Application.routes.draw do
   root 'home#index'
+  get 'all', to: 'home#all'
+  get 'month', to: 'home#month'
+  get 'week', to: 'home#week'
   get 'yesterday', to: 'home#yesterday'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

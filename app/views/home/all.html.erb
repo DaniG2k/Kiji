@@ -1,0 +1,10 @@
+<% title "All articles" %>
+
+<h1><%= t 'title' %> <small>Read the news. <%= render 'about' %></small></h1>
+<hr />
+
+<%= render 'article_list', :articles => @all_articles %>
+<%= will_paginate @all_articles, renderer: FoundationPagination::Rails %>
+
+<hr />
+<%= render 'buttons' %>

@@ -3,7 +3,8 @@
 <h1><%= t 'title' %> <small>Read the news. <%= render 'about' %></small></h1>
 <hr />
 
-<%= link_to "Today's articles", root_path, class: "button tiny radius" %>
-
 <%= render 'article_list', :articles => @yesterday_articles %>
 <%= will_paginate @yesterday_articles, renderer: FoundationPagination::Rails %>
+
+<hr />
+<%= render 'buttons' %>

@@ -1,0 +1,10 @@
+<% title "This week's top articles" %>
+
+<h1><%= t 'title' %> <small>Read the news. <%= render 'about' %></small></h1>
+<hr />
+
+<%= render 'article_list', :articles => @week_articles %>
+<%= will_paginate @week_articles, renderer: FoundationPagination::Rails %>
+
+<hr />
+<%= render 'buttons' %>
