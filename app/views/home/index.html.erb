@@ -4,22 +4,7 @@
 <hr />
 <%= render 'top_three' %>
 
-<%= render 'today_articles', :articles => @today_articles %>
-<%= will_paginate @today_articles, renderer: FoundationPagination::Rails %>
+<%= link_to "Yesterday's articles", yesterday_path, class: "button tiny radius" %>
 
-<dl class="tabs" data-tab>
-  <dd><a href="#panel2-2">Yesterday's</a></dd>
-  <dd><a href="#panel2-3">This Week's</a></dd>
-  <dd><a href="#panel2-4">This Month's</a></dd>
-</dl>
-<div class="tabs-content">
-  <div class="content active" id="panel2-1">
-    <p><%= render 'more_articles', :articles => @yesterday_articles %></p>
-  </div>
-  <div class="content" id="panel2-2">
-    <p><%= render 'more_articles', :articles => @week_articles %></p>
-  </div>
-  <div class="content" id="panel2-3">
-    <p><%= render 'more_articles', :articles => @month_articles %></p>
-  </div>
-</div>
+<%= render 'article_list', :articles => @today_articles %>
+<%= will_paginate @today_articles, renderer: FoundationPagination::Rails %>

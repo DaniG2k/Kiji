@@ -3,10 +3,12 @@ class HomeController < ApplicationController
   def index
     today_range = Time.zone.now.beginning_of_day.utc..Time.zone.now.end_of_day.utc
     yesterday_range = 1.day.ago.beginning_of_day.utc..1.day.ago.end_of_day.utc
-    week_range = 1.week.ago.beginning_of_day.utc..1.week.ago.end_of_day.utc
-    month_range = 1.month.ago.beginning_of_day.utc..1.month.ago.end_of_day.utc
-
+    
     @today_articles = Article.where(:created_at => today_range)
+    @yesterday_articles = Article.where(:created_at => yesterday_range).order('val DESC')
+    
+    @today_articles = @yesterday_articles if @today_articles.empty?
+
     top_three = @today_articles.order('val DESC')
     @first = top_three.shift
     @second = top_three.shift
@@ -15,9 +17,13 @@ class HomeController < ApplicationController
     @today_articles = @today_articles.where.not(id: [@first.id, @second.id, @third.id])
                 .order("#{sort_column} #{sort_direction}")
                 .paginate(page: params[:page], :per_page => 10)
+  end
+  
+  def yesterday
+    yesterday_range = 1.day.ago.beginning_of_day.utc..1.day.ago.end_of_day.utc
     @yesterday_articles = Article.where(:created_at => yesterday_range).order('val DESC')
-    @week_articles = Article.where(:created_at => week_range).order('val DESC')
-    @month_articles = Article.where(:created_at => month_range).order('val DESC')
+                .order("#{sort_column} #{sort_direction}")
+                .paginate(page: params[:page], :per_page => 10)
   end
   
   private
