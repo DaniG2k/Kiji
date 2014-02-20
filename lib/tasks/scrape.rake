@@ -6,6 +6,7 @@ namespace :scrape do
   
   desc "Run all scrape tasks"
   task :all => [:bbc,
+                :cnn,
                 :nyt,
                 :jt,
                 :jdp,
