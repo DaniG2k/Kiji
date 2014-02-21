@@ -46,6 +46,9 @@ class HomeController < ApplicationController
                 .paginate(page: params[:page], :per_page => 10)
   end
   
+  def about
+  end
+  
   private
   
   def sort_column

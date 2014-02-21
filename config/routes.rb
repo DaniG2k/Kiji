@@ -1,5 +1,6 @@
 Kiji::Application.routes.draw do
   root 'home#index'
+  get 'about', to: 'home#about'
   get 'all', to: 'home#all'
   get 'month', to: 'home#month'
   get 'week', to: 'home#week'
