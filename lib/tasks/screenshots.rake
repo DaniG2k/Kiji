@@ -29,10 +29,19 @@ namespace :scrape do
   end
   
   def get_screenshots
-    puts 'Getting new screenshots'
-    articles = Article.order('val DESC').limit(3)
+    today_range = Time.zone.now.beginning_of_day.utc..Time.zone.now.end_of_day.utc
+    yesterday_range = 1.day.ago.beginning_of_day.utc..1.day.ago.end_of_day.utc
+    today_articles = Article.where(:created_at => today_range).order('val DESC')
+    yesterday_articles = Article.where(:created_at => yesterday_range).order('val DESC')
+    if today_articles.empty?
+      today_articles = yesterday_articles.limit(3)
+    else
+      today_articles = today_articles.limit(3)
+    end
     
-    articles.each_with_index do |article, i|
+    
+    puts 'Getting new screenshots'
+    today_articles.each_with_index do |article, i|
       visit(article.url)
       save_screenshot(File.join(@dir, "screenshot-#{i}.png"))
       sleep 5

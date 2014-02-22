@@ -5,7 +5,7 @@ class HomeController < ApplicationController
     yesterday_range = 1.day.ago.beginning_of_day.utc..1.day.ago.end_of_day.utc
     
     @today_articles = Article.where(:created_at => today_range)
-    @yesterday_articles = Article.where(:created_at => yesterday_range).order('val DESC')
+    @yesterday_articles = Article.where(:created_at => yesterday_range)
     
     @today_articles = @yesterday_articles if @today_articles.empty?
 
