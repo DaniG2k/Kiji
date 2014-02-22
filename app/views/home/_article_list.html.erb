@@ -12,7 +12,7 @@
 			<td><%= article.val %></td>
 			<td>
 				<span data-tooltip class="has-tip" title='<%= "Facebook likes: #{article.likes} - Tweets: #{article.tweets}" %>' >
-					<%= link_to "#{article.title}", article.url %>
+					<%= link_to "#{article.title}", article.url, :target => "_blank" %>
 				</span>
 			</td>
 			<td><%= article.source %></td>
