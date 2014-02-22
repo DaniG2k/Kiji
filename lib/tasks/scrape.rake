@@ -12,6 +12,7 @@ namespace :scrape do
                 :jdp,
                 :chosun,
                 :guardian_all,
+                'economist:all',
                 'south_china_mp:all']
   
   # Gather RSS feed and run FQL and Twitter queries on those urls
@@ -75,6 +76,12 @@ namespace :scrape do
       "South China Morning Post"
     when "cnn.com - asia"
       "CNN - Asia"
+    when "the economist: asia"
+      "The Economist - Asia"
+    when "the economist: china"
+      "The Economist - China"
+    when "analects"
+      "The Economist - Analects"
     else
       src
     end
