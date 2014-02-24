@@ -33,12 +33,7 @@ namespace :scrape do
     yesterday_range = 1.day.ago.beginning_of_day.utc..1.day.ago.end_of_day.utc
     today_articles = Article.where(:created_at => today_range).order('val DESC')
     yesterday_articles = Article.where(:created_at => yesterday_range).order('val DESC')
-    if today_articles.empty?
-      today_articles = yesterday_articles.limit(3)
-    else
-      today_articles = today_articles.limit(3)
-    end
-    
+    articles = today_articles.empty? ? yesterday_articles.limit(3) : today_articles.limit(3)
     
     puts 'Getting new screenshots'
     today_articles.each_with_index do |article, i|
