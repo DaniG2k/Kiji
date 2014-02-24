@@ -13,7 +13,6 @@ namespace :scrape do
                 :chosun,
                 :guardian_all,
                 'economist:all']
-                #'south_china_mp:all']
   
   # Gather RSS feed and run FQL and Twitter queries on those urls
   # Returns a visited hash
@@ -68,12 +67,6 @@ namespace :scrape do
       "The Guardian - Asia Pacific"
     when "world news: china | theguardian.com"
       "The Guardian - China"
-    when "asia feed"
-      "South China Morning Post - Asia"
-    when "hong kong feed"
-      "South China Morning Post - HK"
-    when "china feed"
-      "South China Morning Post"
     when "cnn.com - asia"
       "CNN - Asia"
     when "the economist: asia"
