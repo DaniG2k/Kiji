@@ -12,8 +12,8 @@ namespace :scrape do
                 :jdp,
                 :chosun,
                 :guardian_all,
-                'economist:all',
-                'south_china_mp:all']
+                'economist:all']
+                #'south_china_mp:all']
   
   # Gather RSS feed and run FQL and Twitter queries on those urls
   # Returns a visited hash
