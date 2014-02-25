@@ -1,6 +1,6 @@
 namespace :scrape do
   
-  desc "Run all Guardian scrape tasks"
+  desc "Run all WSJ scrape tasks"
   task :wsj_all => [:wsj_asia, :wsj_china, :wsj_hk]
   
   r = [/(^.*wsj\.com.*)\?/]

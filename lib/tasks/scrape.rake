@@ -11,8 +11,8 @@ namespace :scrape do
                 :jt,
                 :jdp,
                 :chosun,
-                :guardian_all,
                 :wsj_all,
+                :guardian_all,
                 'economist:all']
   
   # Gather RSS feed and run FQL and Twitter queries on those urls
