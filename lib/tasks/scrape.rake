@@ -95,6 +95,7 @@ namespace :scrape do
   
   def get_likes(urls)
     begin
+      puts "Getting Facebook likes"
       urls_str = urls.join("','")
       q = "select url, total_count from link_stat where url in ('#{urls_str}')"
       fbreq = URI.escape("https://graph.facebook.com/fql?q=#{q}")
