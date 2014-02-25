@@ -12,6 +12,7 @@ namespace :scrape do
                 :jdp,
                 :chosun,
                 :guardian_all,
+                :wsj_all,
                 'economist:all']
   
   # Gather RSS feed and run FQL and Twitter queries on those urls
@@ -75,6 +76,10 @@ namespace :scrape do
       "The Economist - China"
     when "analects"
       "The Economist - Analects"
+    when "wsj.com: asia home"
+      "WSJ - Asia"
+    when "wsj.com about china"
+      "WSJ - China"
     else
       src
     end
