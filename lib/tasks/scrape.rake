@@ -54,6 +54,7 @@ namespace :scrape do
       likes = get_likes(urls)
       likes.each {|fb| visited["#{fb['url']}"][:likes] = fb['total_count']}
     end
+    # Return the visited hash
     visited
   end
   
