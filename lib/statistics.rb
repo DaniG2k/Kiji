@@ -4,13 +4,12 @@ module Enumerable
   end
   
   def mean
-    sum / length.to_f
+    sum.to_f / length
   end
 
-  def sample_variance 
-    avg = mean
-    sum = inject(0){ |acc, i| acc + (i-avg)**2 }
-    1/length.to_f*sum
+  def sample_variance
+    sum = inject(0){ |acc, i| acc + (i - mean)**2 }
+    1 / length.to_f * sum
   end
 
   def standard_deviation
@@ -18,6 +17,6 @@ module Enumerable
   end
   
   def zscore
-    collect { |v| (v - mean) / standard_deviation }
+    collect { |v| (v - mean) / (standard_deviation.nonzero? || 1) }
   end
 end

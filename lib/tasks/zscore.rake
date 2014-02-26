@@ -13,7 +13,6 @@ task :zscore => :environment do
     # If there's a single raw score, lower default value and
     # place inside an array. Else, compute the zscore.
     zscores = x.length == 1 ? [-3.0] : x.zscore
-    
     zscores.each_with_index do |zscore, i|
       a = Article.find_by(:url => urls[i])
       a.val = zscore
