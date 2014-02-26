@@ -48,13 +48,12 @@ namespace :scrape do
       end
     end
     
-    # Process Facebook likes in batch
-    likes = get_likes(urls)
-    likes['data'].each do |fb|
-      url = fb['url']
-      visited[url][:likes] = fb['total_count']
+    # Process Facebook likes in batch only if we have
+    # a list of urls.
+    if urls.present?
+      likes = get_likes(urls)
+      likes.each {|fb| visited["#{fb['url']}"][:likes] = fb['total_count']}
     end
-    
     visited
   end
   
@@ -100,7 +99,7 @@ namespace :scrape do
       q = "select url, total_count from link_stat where url in ('#{urls_str}')"
       fbreq = URI.escape("https://graph.facebook.com/fql?q=#{q}")
       likes = JSON.parse(open(fbreq).read)
-      likes
+      likes['data']
     rescue
       puts "Error occurred at get_likes method."
     end
@@ -124,7 +123,6 @@ namespace :scrape do
     if visited.present?
       puts "Adding data to the database"
       visited.each do |key, val|
-        #puts "#{key} #{val}"
         article = Article.find_or_initialize_by(:url => key)
         article.update(
           source: val[:source],
