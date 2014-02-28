@@ -6,19 +6,18 @@
 
     <title><%= content_for?(:title) ? yield(:title) : t('title') %></title>
     <%= stylesheet_link_tag "application" %>
-    <%= stylesheet_link_tag "application" %>
     <%= javascript_include_tag "vendor/modernizr" %>
     <%= csrf_meta_tags %>
   </head>
 
   <body>
-	<%= render 'common/topbar' %>
+		<%= render 'common/topbar' %>
   	<div class="row">
     	<div class="large-12 columns">
 		    <%= yield %>
-		    <%= render 'common/footer' %>
 		    <%= javascript_include_tag "application" %>
 			</div>
 		</div>
+		<%= render 'common/footer' %>
   </body>
 </html>
