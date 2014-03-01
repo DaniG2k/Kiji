@@ -59,30 +59,18 @@ namespace :scrape do
   end
   
   def format_source(src)
-    case src.downcase.strip
-    when "nyt > asia pacific"
-      "New York Times - Asia Pacific"
-    when "the japan times: news & business"
-      "The Japan Times"
-    when "world news : asia pacific roundup | theguardian.com"
-      "The Guardian - Asia Pacific"
-    when "world news: china | theguardian.com"
-      "The Guardian - China"
-    when "cnn.com - asia"
-      "CNN - Asia"
-    when "the economist: asia"
-      "The Economist - Asia"
-    when "the economist: china"
-      "The Economist - China"
-    when "analects"
-      "The Economist - Analects"
-    when "wsj.com: asia home"
-      "WSJ - Asia"
-    when "wsj.com about china"
-      "WSJ - China"
-    else
-      src
-    end
+    sources = {
+      "nyt > asia pacific" =>                   "New York Times - Asia Pacific",
+      "the japan times: news & business" =>     "The Japan Times",
+      "world news: china | theguardian.com" =>  "The Guardian - China",
+      "cnn.com - asia" =>                       "CNN - Asia",
+      "the economist: asia" =>                  "The Economist - Asia",
+      "the economist: china" =>                 "The Economist - China",
+      "analects" =>                             "The Economist - Analects",
+      "wsj.com: asia home" =>                   "WSJ - Asia",
+      "wsj.com about china" =>                  "WSJ - China"
+    }
+    sources[src.downcase.strip]
   end
   
   def get_matching_url(entry, regexes)
