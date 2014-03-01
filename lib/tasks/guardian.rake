@@ -1,26 +1,17 @@
 namespace :scrape do
-  
+
+  feeds = %w(http://www.theguardian.com/world/china/rss
+            http://www.theguardian.com/world/south-korea/rss
+            http://www.theguardian.com/world/japan/rss
+            http://www.theguardian.com/world/hong-kong/rss
+            http://www.theguardian.com/world/taiwan/rss
+            http://www.theguardian.com/world/mongolia/rss)
+            
   desc "Run all Guardian scrape tasks"
-  task :guardian_all => [:guardian_asia, :guardian_china, :guardian_japan]
-  
-  desc "Scrape news from The Guardian's Asia section"
-  task :guardian_asia => :environment do
+  task :guardian_all => :environment do
     regexes = [/(^http.*)/]
-    visited = fetch_rss_data "http://www.theguardian.com/world/asiapacific/roundup/rss", regexes
-    add_to_db visited
-  end
-  
-  desc "Scrape news from The Guardian's China section"
-  task :guardian_china => :environment do
-    regexes = [/(^http.*)/]
-    visited = fetch_rss_data "http://feeds.theguardian.com/theguardian/world/china/rss", regexes
-    add_to_db visited
-  end
-  
-  desc "Scrape news from The Guardian's Japan section"
-  task :guardian_japan => :environment do
-    regexes = [/(^http.*)/]
-    visited = fetch_rss_data "http://feeds.theguardian.com/theguardian/world/china/rss", regexes
-    add_to_db visited
+    feeds.each do |feed| 
+      add_to_db(fetch_rss_data(feed, regexes))
+    end
   end
 end
