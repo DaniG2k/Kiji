@@ -59,7 +59,7 @@ namespace :scrape do
   end
   
   def format_source(src)
-    src.downcase!.strip!
+    src.strip!
     sources = {
       "nyt > asia pacific" =>                   "New York Times - Asia Pacific",
       "the japan times: news & business" =>     "The Japan Times",
@@ -71,7 +71,7 @@ namespace :scrape do
       "wsj.com: asia home" =>                   "WSJ - Asia",
       "wsj.com about china" =>                  "WSJ - China"
     }
-    sources[src] || src
+    sources[src.downcase] || src
   end
   
   def get_matching_url(entry, regexes)
