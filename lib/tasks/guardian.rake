@@ -8,7 +8,7 @@ namespace :scrape do
             http://www.theguardian.com/world/mongolia/rss)
             
   desc "Run all Guardian scrape tasks"
-  task :guardian_all => :environment do
+  task :guardian => :environment do
     regexes = [/(^http.*)/]
     feeds.each do |feed| 
       add_to_db(fetch_rss_data(feed, regexes))

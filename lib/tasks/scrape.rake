@@ -10,10 +10,10 @@ namespace :scrape do
                 :nyt,
                 :jt,
                 :jdp,
+                :wsj,
                 :chosun,
-                :wsj_all,
-                :guardian_all,
-                'economist:all']
+                :guardian,
+                :economist]
   
   # Gather RSS feed and run FQL and Twitter queries on those urls
   # Returns a visited hash
