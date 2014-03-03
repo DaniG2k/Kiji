@@ -61,15 +61,17 @@ namespace :scrape do
   def format_source(src)
     src.strip!
     sources = {
-      "nyt > asia pacific" =>                   "New York Times - Asia Pacific",
-      "the japan times: news & business" =>     "The Japan Times",
-      "world news: china | theguardian.com" =>  "The Guardian - China",
-      "cnn.com - asia" =>                       "CNN - Asia",
-      "the economist: asia" =>                  "The Economist - Asia",
-      "the economist: china" =>                 "The Economist - China",
-      "analects" =>                             "The Economist - Analects",
-      "wsj.com: asia home" =>                   "WSJ - Asia",
-      "wsj.com about china" =>                  "WSJ - China"
+      "nyt > asia pacific" =>                     "New York Times - Asia Pacific",
+      "the japan times: news & business" =>       "The Japan Times",
+      "world news: china | theguardian.com" =>    "The Guardian - China",
+      "world news: japan | theguardian.com" =>    "The Guardian - Japan",
+      "world news: hong kong | theguardian.com" =>"The Guardian - Hong Kong",
+      "cnn.com - asia" =>                         "CNN - Asia",
+      "the economist: asia" =>                    "The Economist - Asia",
+      "the economist: china" =>                   "The Economist - China",
+      "analects" =>                               "The Economist - Analects",
+      "wsj.com: asia home" =>                     "WSJ - Asia",
+      "wsj.com about china" =>                    "WSJ - China"
     }
     sources[src.downcase] || src
   end
