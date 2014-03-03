@@ -66,6 +66,7 @@ namespace :scrape do
       "world news: china | theguardian.com" =>    "The Guardian - China",
       "world news: japan | theguardian.com" =>    "The Guardian - Japan",
       "world news: hong kong | theguardian.com" =>"The Guardian - Hong Kong",
+      "world news: south korea | theguardian.com"=>"The Guardian - South Korea",
       "cnn.com - asia" =>                         "CNN - Asia",
       "the economist: asia" =>                    "The Economist - Asia",
       "the economist: china" =>                   "The Economist - China",
