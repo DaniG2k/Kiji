@@ -115,7 +115,7 @@ namespace :scrape do
     if visited.present?
       puts "Adding data to the database"
       visited.each do |key, val|
-        puts "#{key}\n\t#{val}"
+        #puts "#{key}\n\t#{val}"
         article = Article.find_or_initialize_by(:url => key)
         article.update(
           source: val[:source],

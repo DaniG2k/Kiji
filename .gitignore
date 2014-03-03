@@ -18,3 +18,4 @@
 # Ignore secret files
 /config/initializers/secret_token.rb
 /config/database.yml
+/app/assets/images/screenshots/*.png
