@@ -1,0 +1,23 @@
+div#masthead {
+    border-bottom: 3px solid #333333;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+div#masthead div {
+    border-top: 1px solid #DDDDDD;
+}
+
+div#masthead p {
+    background: none repeat scroll 0 0 #FFFFFF;
+    color: #777777;
+    font-size: 14px;
+    margin: -10px auto 37px;
+    padding: 0;
+    text-align: center;
+    width: 25%;
+}
+
+div#masthead p strong {
+    color: #333333;
+}
