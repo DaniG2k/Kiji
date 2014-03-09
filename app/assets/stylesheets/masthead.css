@@ -11,6 +11,7 @@ div#masthead div {
 div#masthead p {
     background: none repeat scroll 0 0 #FFFFFF;
     color: #777777;
+    font-family: "Georgia";
     font-size: 14px;
     margin: -10px auto 37px;
     padding: 0;
@@ -21,3 +22,24 @@ div#masthead p {
 div#masthead p strong {
     color: #333333;
 }
+
+ul.featurettes {
+    border-bottom: 1px solid #CCCCCC;
+    margin-bottom: 20px;
+    overflow: hidden;
+    padding-bottom: 14px;
+    list-style-type: none;
+}
+
+ul.featurettes li {
+    color: #666666;
+    float: left;
+    width: 222px;
+}
+
+ul.featurettes li + li {
+    border-left: 1px solid #DDDDDD;
+    margin-left: 14px;
+    padding-left: 15px;
+}
+

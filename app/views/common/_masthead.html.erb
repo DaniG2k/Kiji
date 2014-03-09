@@ -1,6 +1,6 @@
 <div id="masthead">
 	<div>
-		<p><%= DateTime.now.strftime("%A %B %e, %Y") %></p>
+		<p><%= content_tag :strong, DateTime.now.strftime("%A") %> <%= DateTime.now.strftime("%B %e, %Y") %></p>
 	</div>
 	<h1><%= t 'title' %> <small>Read the news. <%= render 'about' %></small></h1>
 </div>
