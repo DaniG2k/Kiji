@@ -1,13 +1,24 @@
 <div class="row">
-	<div class="twelve columns text-center"><br />
-        <h2>Hottest 3 <small>of the day</small></h2>
-        <ul class="small-block-grid-1 medium-block-grid-3 large-block-grid-3">
-			<% [@first, @second, @third].each_with_index do |article, i| %>
-			<li>
-			<%= link_to( image_tag("screenshots/screenshot-#{i}.png", :class => "th radius"), article.url, :target => "_blank" ) %>
-			<%= link_to("#{article.title} - #{article.source}", article.url, :target => "_blank") %>
-			</li>
-			<% end %>
-		</ul>
-   </div>    
+	<div class="large-8 columns top-three">
+		<% [@first, @second, @third].each_with_index do |article, i| %>
+		<%= link_to( image_tag("screenshots/screenshot-#{i}.png", :width => 290, :height => 218, :class => "left th radius"), article.url, target: "_blank" ) %>
+		<strong><%= link_to article.title, article.url, :target => "_blank" %></strong> <%= article.source %>
+		<p>
+			Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+		</p>
+		<hr />
+		<% end %>
+	</div>
+	<div class="large-4 columns">
+		<div class="panel">
+			<h5>This is a regular panel.</h5>
+			<p>It has an easy to override visual style, and is appropriately subdued.</p>
+		</div>
+		<div class="panel">
+			<h5>This is another regular panel.</h5>
+			<p>It has an easy to override visual style, and is appropriately subdued.
+				It has an easy to override visual style, and is appropriately subdued.
+				It has an easy to override visual style, and is appropriately subdued.</p>
+		</div>
+	</div>
 </div>

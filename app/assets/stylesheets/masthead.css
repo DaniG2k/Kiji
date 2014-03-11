@@ -43,3 +43,10 @@ ul.featurettes li + li {
     padding-left: 15px;
 }
 
+div.orbit-caption a {
+	color: #FFF;
+}
+
+div.orbit-caption a:hover {
+	text-decoration: underline;
+}
