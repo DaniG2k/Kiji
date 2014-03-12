@@ -60,21 +60,24 @@ namespace :scrape do
   
   def format_source(src)
     src.strip!
-    sources = {
-      "cnn.com - asia" =>                           "CNN",
-      "the economist: asia" =>                      "The Economist",
-      "the economist: china" =>                     "The Economist",
-      "analects" =>                                 "The Economist",
-      "world news: china | theguardian.com" =>      "The Guardian",
-      "world news: japan | theguardian.com" =>      "The Guardian",
-      "world news: hong kong | theguardian.com" =>  "The Guardian",
-      "world news: south korea | theguardian.com"=> "The Guardian",
-      "the japan times: news & business" =>         "The Japan Times",
-      "nyt > asia pacific" =>                       "New York Times",
-      "wsj.com: asia home" =>                       "WSJ",
-      "wsj.com about china" =>                      "WSJ"
-    }
-    sources[src.downcase] || src
+    case src.downcase
+    when /bbc/
+      "BBC"
+    when /cnn/
+      "CNN"
+    when /economist|analects/
+      "The Economist"
+    when /guardian/
+      "The Guardian"
+    when /japan times/
+      "The Japan Times"
+    when /nyt/
+      "New York Times"
+    when /wsj/
+      "WSJ"
+    else
+      src
+    end
   end
   
   def get_matching_url(entry, regexes)
