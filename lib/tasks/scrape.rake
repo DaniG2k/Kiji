@@ -6,14 +6,14 @@ namespace :scrape do
   
   desc "Run all scrape tasks"
   task :all => [:bbc,
-                :cnn,
-                :nyt,
-                :jt,
-                :jdp,
-                :wsj,
                 :chosun,
+                :cnn,
+                :economist,
                 :guardian,
-                :economist]
+                :jdp,
+                :jt,
+                :nyt,                
+                :wsj]
   
   # Gather RSS feed and run FQL and Twitter queries on those urls
   # Returns a visited hash
@@ -63,6 +63,8 @@ namespace :scrape do
     case src.downcase
     when /bbc/
       "BBC"
+    when /chosun/
+      "Chosun Ilbo"
     when /cnn/
       "CNN"
     when /economist|analects/
