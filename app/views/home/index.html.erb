@@ -1,9 +1,6 @@
 <% title 'Home' %>
 
-<%= form_tag(root_path, :method => "get", id: "search-form") do %>
-  <%= text_field_tag :search, params[:search], placeholder: "Search articles" %>
-  <%= submit_tag "Search", :name => nil %>
-<% end %>
+<%= render 'common/search_box' %>
 
 <ul class="featurettes hide-for-small hide-for-medium">
 	<li>

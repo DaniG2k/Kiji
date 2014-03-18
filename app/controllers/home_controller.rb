@@ -1,6 +1,12 @@
 class HomeController < ApplicationController
   helper_method :sort_column, :sort_direction
   def index
+    if params[:search].empty?
+      @searched = []
+    else
+      @searched = Article.search(params[:search])
+    end
+        
     today_range = Time.zone.now.beginning_of_day.utc..Time.zone.now.end_of_day.utc
     yesterday_range = 1.day.ago.beginning_of_day.utc..1.day.ago.end_of_day.utc
     
@@ -17,8 +23,6 @@ class HomeController < ApplicationController
     @today_articles = @today_articles.where.not(id: [@first.id, @second.id, @third.id])
                 .order("#{sort_column} #{sort_direction}")
                 .paginate(page: params[:page], :per_page => 10)
-                
-    @searched = params[:search] ? Article.search(params[:search]) : []
   end
   
   def yesterday

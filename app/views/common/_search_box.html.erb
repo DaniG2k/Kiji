@@ -1,0 +1,17 @@
+<%= form_tag(root_path, :method => "get", id: "search-form") do %>
+<div class="row">
+	<div class="large-6 columns">
+		<div class="row collapse">
+			<div class="small-10 columns">
+				<%= text_field_tag :search, params[:search], placeholder: "Search articles" %>
+      </div>
+      <div class="small-2 columns">
+      <%= content_tag :button, :type => 'submit', :class => "button postfix" do %>
+      	<i class="fi-magnifying-glass"></i>
+      <% end %>
+   		</div>
+    </div>
+  </div>
+</div>
+<% end %>
+  

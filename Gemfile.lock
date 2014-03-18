@@ -58,6 +58,9 @@ GEM
       curb (~> 0.8.1)
       loofah (~> 1.2.1)
       sax-machine (~> 0.2.1)
+    foundation-icons-sass-rails (3.0.0)
+      railties (>= 3.1.1)
+      sass-rails (>= 3.1.1)
     foundation-rails (5.2.1.0)
       railties (>= 3.1.0)
       sass (>= 3.2.0)
@@ -192,6 +195,7 @@ DEPENDENCIES
   capybara-screenshot
   coffee-rails (~> 4.0.0)
   feedjira
+  foundation-icons-sass-rails
   foundation-rails
   jbuilder (~> 1.2)
   jquery-rails
