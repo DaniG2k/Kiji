@@ -1,5 +1,4 @@
 namespace :scrape do
-
   feeds = %w(http://www.theguardian.com/world/china/rss
             http://www.theguardian.com/world/south-korea/rss
             http://www.theguardian.com/world/japan/rss

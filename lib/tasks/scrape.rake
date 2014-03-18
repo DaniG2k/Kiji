@@ -2,7 +2,7 @@ namespace :scrape do
   #require 'mechanize'
   require 'json'
   require 'open-uri'
-  require 'feedzirra'
+  require 'feedjira'
   
   desc "Run all scrape tasks"
   task :all => [:bbc,
@@ -24,7 +24,7 @@ namespace :scrape do
   #  :tweets => ''}
   # }
   def fetch_rss_data(rss, regexes)
-    feed = Feedzirra::Feed.fetch_and_parse(rss)
+    feed = Feedjira::Feed.fetch_and_parse(rss)
     visited = {}
     #unvisited = []
     

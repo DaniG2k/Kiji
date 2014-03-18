@@ -42,7 +42,7 @@ gem 'pg'
 gem 'pry'
 gem 'whenever', :require => false
 gem 'mechanize'
-gem 'feedzirra'
+gem 'feedjira'
 gem 'capybara'
 gem 'capybara-screenshot'
 gem 'poltergeist'
