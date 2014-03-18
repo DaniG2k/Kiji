@@ -1,0 +1,4 @@
+<h2>Search results:</h2>
+<% @searched.each do |result| %>
+	<%= link_to "#{result.title}", result.url, :target => "_blank" %><br />
+<% end %>
