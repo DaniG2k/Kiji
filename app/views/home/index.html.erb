@@ -21,7 +21,7 @@
 	</li>
 </ul>
 
-<%= render 'top_three' unless @searched %>
+<%= render 'top_three' if (params[:page] == '1' && !@searched) %>
 
 <div class="row">
 	<div class="medium-8 large-8 columns">
