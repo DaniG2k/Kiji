@@ -12,6 +12,7 @@ namespace :scrape do
                 :guardian,
                 :jdp,
                 :jt,
+                :nippon,
                 :nyt,
                 :tokyoreporter,               
                 :wsj]
@@ -34,6 +35,10 @@ namespace :scrape do
     
     feed.entries.each do |entry|
       begin
+        if entry.published.nil?
+          puts "There is no date for this feed entry.\nSkipping."
+          next
+        end
         next unless entry.published.today?
         url = get_matching_url(entry, regexes)
         puts "Querying #{url}"
@@ -74,9 +79,11 @@ namespace :scrape do
       "The Guardian"
     when /japan times/
       "The Japan Times"
+    when /nippon\.com/
+      "Nippon.com"
     when /nyt/
       "New York Times"
-    when /tokyoreporter/
+    when /tokyo reporter/
       "Tokyo Reporter"
     when /wsj/
       "WSJ"
