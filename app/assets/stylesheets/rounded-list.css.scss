@@ -28,7 +28,7 @@ ol {
 			background: #eee;
 		}
 		&:hover:before {
-			transform: rotate(360deg);
+			transform: scaleX(-1);
 		  -webkit-transform: rotate(360deg); /* Chrome, Safari, Opera */
 		  -ms-transform: rotate(360deg); /* IE 9 */
 		}
