@@ -12,7 +12,8 @@ namespace :scrape do
                 :guardian,
                 :jdp,
                 :jt,
-                :nyt,                
+                :nyt,
+                :tokyoreporter,               
                 :wsj]
   
   # Gather RSS feed and run FQL and Twitter queries on those urls
@@ -75,6 +76,8 @@ namespace :scrape do
       "The Japan Times"
     when /nyt/
       "New York Times"
+    when /tokyoreporter/
+      "Tokyo Reporter"
     when /wsj/
       "WSJ"
     else
