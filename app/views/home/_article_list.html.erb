@@ -2,14 +2,16 @@
 <%= sortable 'source' %>
 
 <ol class="rounded-list">
-	<!-- Nesting these is also possible 
+	<% articles.each do |article| %>
+	<li>
+		<%= link_to "#{article.title}", article.url, :target => "_blank" %>
+	</li>
+	<% end %>
+	<!-- Nesting is also possible 
 		<ol>
    	<li><a href="">List sub item</a></li>
     <li><a href="">List sub item</a></li>
     <li><a href="">List sub item</a></li>
   </ol>
 	-->
-	<% articles.each do |article| %>
-	<li><%= link_to "#{article.title}", article.url, :target => "_blank" %></li>
-	<% end %>
 </ol>

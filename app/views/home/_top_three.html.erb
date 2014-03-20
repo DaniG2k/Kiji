@@ -1,4 +1,15 @@
 <div class="row">
+	<ol class="circle-list">
+		<% [@first, @second, @third].each_with_index do |article, i| %>
+	  <li>
+	  	<h3><%= link_to article.title, article.url, :target => "_blank" %></h3>
+	  	<a href="">Summary here</a>
+	  </li>
+	 <% end %>            
+	</ol>
+</div>
+
+<div class="row">
 	<div class="large-8 columns top-three">
 		<% [@first, @second, @third].each_with_index do |article, i| %>
 		<%= link_to( image_tag("screenshots/screenshot-#{i}.png", :width => 290, :height => 218, :class => "left th radius"), article.url, target: "_blank" ) %>
@@ -22,9 +33,3 @@
 		</div>
 	</div>
 </div>
-
-<ol class="circle-list">
-	<% [@first, @second, @third].each_with_index do |article, i| %>
-  <li><h2><%= link_to article.title, article.url, :target => "_blank" %></h2><a href="">Summary here</a></li>
- <% end %>            
-</ol>
