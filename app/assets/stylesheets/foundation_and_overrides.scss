@@ -7,6 +7,7 @@
 
 // Allows the use of rem-calc() or lower-bound() in your settings
 @import "foundation/functions";
+@import "colors";
 
 // $experimental: true;
 
@@ -764,12 +765,17 @@ $warning-color: #F0AD4E;
 
 // We use these to control the background and border styles
 // $panel-bg: scale-color(#fff, $lightness: -5%);
+$panel-bg: $light-gray-1;
 // $panel-border-style: solid;
 // $panel-border-size: 1px;
+.panel {
+  transform: skewX(-3deg);
+}
 
 // We use this % to control how much we darken things on hover
 // $panel-function-factor: -11%;
 // $panel-border-color: scale-color($panel-bg, $lightness: $panel-function-factor);
+$panel-border-color: $light-gray-2;
 
 // We use these to set default inner padding and bottom margin
 // $panel-margin-bottom: rem-calc(20);
