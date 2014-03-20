@@ -36,7 +36,7 @@ namespace :scrape do
     feed.entries.each do |entry|
       begin
         if entry.published.nil?
-          puts "There is no date for this feed entry.\nSkipping."
+          puts "There is no published data for this feed entry.\nSkipping..."
           next
         end
         next unless entry.published.today?
