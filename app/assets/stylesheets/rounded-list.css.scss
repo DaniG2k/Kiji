@@ -1,3 +1,6 @@
+$light-gray-1: #F8F8F8;
+$light-gray-2: #EBEBEB;
+
 ol {
 	counter-reset: li; /* Initiate a counter */
   list-style: none; /* Remove default numbering */
@@ -19,13 +22,13 @@ ol {
 		padding: .4em .4em .4em 2em;
 		*padding: .4em;
 		margin: .5em 0;
-		background: #ddd;
+		background: $light-gray-1;
 		color: #444;
 		text-decoration: none;
 		border-radius: .3em;
 		/*transition: all .2s ease-out; Uncomment here to add fade-in/out effect*/
 		&:hover {
-			background: #eee;
+			background: $light-gray-2;
 		}
 		&:hover:before {
 			transform: scaleX(-1);
