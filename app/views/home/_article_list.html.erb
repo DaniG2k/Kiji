@@ -1,16 +1,15 @@
-<table>
-	<thead>
-		<tr>
-			<th><%= sortable 'title' %></th>
-			<th><%= sortable 'source' %></th>
-		</tr>
-	</thead>
-	<tbody>
+<%= sortable 'title' %>
+<%= sortable 'source' %>
+
+<ol class="rounded-list">
+	<!-- Nesting these is also possible 
+		<ol>
+   	<li><a href="">List sub item</a></li>
+    <li><a href="">List sub item</a></li>
+    <li><a href="">List sub item</a></li>
+  </ol>
+	-->
 	<% articles.each do |article| %>
-		<tr>
-			<td><%= link_to "#{article.title}", article.url, :target => "_blank" %></td>
-			<td><%= article.source %></td>
-		</tr>
+	<li><%= link_to "#{article.title}", article.url, :target => "_blank" %></li>
 	<% end %>
-	</tbody>
-</table>
+</ol>
