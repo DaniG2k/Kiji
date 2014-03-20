@@ -11,15 +11,15 @@
   </head>
 
   <body>
-		<%= render 'common/topbar' %>
-		<br />
+  	<%= render 'common/topbar' %>
+  	<br />
   	<div class="row">
-    	<div class="large-12 columns">
-    		<%= render 'common/masthead' %>
+  		<div class="large-12 columns">
+  			<%= render 'common/masthead' %>
 		    <%= yield %>
 		    <%= javascript_include_tag "application" %>
-			</div>
 		</div>
-		<%= render 'common/footer' %>
+	</div>
+	<%= render 'common/footer' %>
   </body>
 </html>
