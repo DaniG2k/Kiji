@@ -1,0 +1,56 @@
+$light-gray-1: #F8F8F8;
+$light-gray-2: #EBEBEB;
+
+ol {
+	counter-reset: li; /* Initiate a counter */
+  list-style: none; /* Remove default numbering */
+  *list-style: decimal; /* Keep using default numbering for IE6/7 */
+  font: 15px 'trebuchet MS', 'lucida sans';
+  padding: 0;
+  margin-bottom: 4em;
+  text-shadow: 0 1px 0 rgba(255,255,255,.5);
+  
+  ol {
+  	margin: 0 0 0 2em; /* Add some left margin for inner lists */
+  }
+}
+
+.rounded-list{
+	a {
+		position: relative;
+		display: block;
+		padding: .7em .7em .7em 2em;
+		*padding: .4em;
+		margin: .5em 0;
+		background: $light-gray-1;
+		color: #444;
+		text-decoration: none;
+		border-radius: .3em;
+		/*transition: all .2s ease-out; Uncomment here to add fade-in/out effect*/
+		&:hover {
+			background: $light-gray-2;
+		}
+		&:hover:before {
+			transform: scaleX(-1);
+		  -webkit-transform: scaleX(-1); /* Chrome, Safari, Opera */
+		  -ms-transform: scaleX(-1); /* IE 9 */
+		}
+		&:before {
+			content: counter(li);
+		  counter-increment: li;
+		  position: absolute; 
+		  left: -1.3em;
+		  top: 50%;
+		  margin-top: -1em;
+		  background: #87ceeb;
+		  height: 2em;
+		  width: 2em;
+		  line-height: 1.4em;
+		  border: .3em solid #fff;
+		  text-align: center;
+		  font-weight: bold;
+		  border-radius: 2em;
+		  transition: all .3s ease-out;
+		}
+	}
+}
