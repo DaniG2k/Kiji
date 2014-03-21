@@ -52,13 +52,12 @@ ol {
 		  transition: all .3s ease-out;
 		  -webkit-transition: all .3s ease-out; /* For Safari 3.1 to 6.0 */
 		}
-		/*span {
+		span {
       float: right; 
-      background: #c0c0c0;
-      display: inline-block;
+      background: $light-gray-3;
+      padding: 0.4em;
       border-radius: .3em;
       font-size: 0.7em;
     }
-    */
 	}
 }
