@@ -26,6 +26,7 @@
     color: #ccc;
     border-radius: 1.5em;
     transition: all .2s ease-out;
+    -webkit-transition: all .2s ease-out; /* For Safari 3.1 to 6.0 */
   }
   li:hover h3:before {
     background-color: #ffd797;
