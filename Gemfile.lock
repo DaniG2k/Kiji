@@ -50,17 +50,14 @@ GEM
     coffee-script-source (1.7.0)
     curb (0.8.5)
     daemon_controller (1.2.0)
-    domain_name (0.5.16)
+    domain_name (0.5.17)
       unf (>= 0.0.5, < 1.0.0)
     erubis (2.7.0)
     execjs (2.0.2)
-    feedjira (1.0.0)
+    feedjira (1.1.0)
       curb (~> 0.8.1)
       loofah (~> 1.2.1)
       sax-machine (~> 0.2.1)
-    foundation-icons-sass-rails (3.0.0)
-      railties (>= 3.1.1)
-      sass-rails (>= 3.1.1)
     foundation-rails (5.2.1.0)
       railties (>= 3.1.0)
       sass (>= 3.2.0)
@@ -163,7 +160,7 @@ GEM
       libv8 (~> 3.16.14.0)
       ref
     thor (0.18.1)
-    thread_safe (0.2.0)
+    thread_safe (0.3.1)
       atomic (>= 1.1.7, < 2)
     tilt (1.4.1)
     treetop (1.4.15)
@@ -195,7 +192,6 @@ DEPENDENCIES
   capybara-screenshot
   coffee-rails (~> 4.0.0)
   feedjira
-  foundation-icons-sass-rails
   foundation-rails
   jbuilder (~> 1.2)
   jquery-rails

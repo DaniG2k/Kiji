@@ -12,7 +12,3 @@
  *= require foundation_and_overrides
  *= require_tree .
  */
-
-// For a list of Foundation icons:
-// http://zurb.com/playground/foundation-icon-fonts-3
-@import 'foundation-icons';

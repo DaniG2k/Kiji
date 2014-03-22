@@ -1,0 +1,22 @@
+@import 'colors';
+
+input#search {
+  background-color: $light-gray-1;
+  background: url("../images/search.png") no-repeat 9px center;
+  background-size: 20px 20px;
+  
+  padding: 9px 9px 9px 33px;
+  
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  width: 40px;
+  
+  -webkit-transition: all .3s;
+  -moz-transition: all .3s;
+  transition: all .3s;
+  
+  &:focus{
+    width: 100%;
+  }
+}

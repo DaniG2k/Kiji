@@ -47,7 +47,6 @@ gem 'capybara'
 gem 'capybara-screenshot'
 gem 'poltergeist'
 gem 'foundation-rails'
-gem 'foundation-icons-sass-rails'
 gem 'will_paginate-foundation'
 
 # Use ActiveModel has_secure_password
