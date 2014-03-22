@@ -22,16 +22,16 @@
 set :output, {:error => File.join(Whenever.path, 'log', 'whenever_error.log'),
               :standard => File.join(Whenever.path, 'log', 'whenever_cron.log')}
 
-env_export = 'RAILS_ENV=production; export $RAILS_ENV'
+env  = 'RAILS_ENV=production'
 chdir = "cd #{Whenever.path}"
-all = "rake scrape:all"
-zscore = "rake zscore"
-clobber = "rake assets:clobber"
-screenshots = "rake scrape:screenshots"
-precompile = "rake assets:precompile"
+all = "#{env} rake scrape:all"
+zscore = "#{env} rake zscore"
+clobber = "#{env} rake assets:clobber"
+screenshots = "#{env} rake scrape:screenshots"
+precompile = "#{env} rake assets:precompile"
 nginx_recache = "touch #{Whenever.path}/tmp/restart.txt"
 
 every 3.hours do
   #command [chdir, all, zscore, clobber, screenshots, precompile, nginx_recache].join(' && ')
-  command [env_export, chdir, all, zscore, screenshots].join(' && ')
+  command [chdir, all, zscore, screenshots].join(' && ')
 end
