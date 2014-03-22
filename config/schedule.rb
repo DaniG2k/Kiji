@@ -32,5 +32,6 @@ precompile = "#{env} rake assets:precompile"
 nginx_recache = "touch #{Whenever.path}/tmp/restart.txt"
 
 every 3.hours do
-  command [chdir, all, zscore, clobber, screenshots, precompile, nginx_recache].join(' && ')
+  #command [chdir, all, zscore, clobber, screenshots, precompile, nginx_recache].join(' && ')
+  command [chdir, all, zscore].join(' && ')
 end
