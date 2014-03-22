@@ -13,7 +13,7 @@ namespace :scrape do
         :debug => true)
     end
     
-    @dir = File.join(Rails.root, 'app', 'assets', 'images', 'screenshots')
+    @dir = File.join(Rails.root, 'public', 'images', 'screenshots')
     #path = File.join(Rails.root, 'app', 'assets', 'images', 'screenshots')
     #Capybara.save_and_open_page_path = path 
     rm_screenshots
