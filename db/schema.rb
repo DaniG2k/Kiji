@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140215233659) do
+ActiveRecord::Schema.define(version: 20140322232114) do
 
   create_table "articles", force: true do |t|
     t.string   "title"
@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 20140215233659) do
     t.integer  "tweets"
     t.integer  "raw_score"
     t.decimal  "val"
+    t.text     "body"
   end
 
 end
