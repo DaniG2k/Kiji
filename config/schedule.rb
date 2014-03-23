@@ -37,6 +37,6 @@ every 3.hours do
   command [chdir, all, zscore, screenshots].join(' && ')
 end
 
-every 12.hours do
+every :day, :at => '12pm' do
   command [chdir, get_body].join(' && ')
 end
