@@ -17,12 +17,16 @@ namespace :scrape do
     key = YAML.load_file(Rails.root.join('config/secrets.yml'))['embedly_key']
     # Make Embedly request
     # Embedly can process a max of 10 urls at a time with a batch request.
+    puts "Making Embedly request"
     embedly_req = "http://api.embed.ly/1/extract?key=#{key}&urls=#{top_ten_urls}&maxwidth=10&maxheight=10&format=json"
     # Parse content
     response = JSON.parse(open(embedly_req).read)
     
+    puts "Processing:"
     response.each do |article|
+      puts "\tTitle: #{article['title']}"
       sanitized_body = ActionView::Base.full_sanitizer.sanitize(article['content'])
+      puts "Body sanitized. Adding to db."
       Article.find_by(url: article['original_url']).update(body: sanitized_body)
     end
     
