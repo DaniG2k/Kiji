@@ -1,7 +1,8 @@
 namespace :scrape do
   desc "Get article body"
   task :get_body => :environment do
-    # We need this for url escaping
+    require 'json'
+    # Needed for url escaping
     require 'erb'
     include ERB::Util
     
@@ -26,7 +27,7 @@ namespace :scrape do
     response.each do |article|
       puts "\tTitle: #{article['title']}"
       sanitized_body = ActionView::Base.full_sanitizer.sanitize(article['content'])
-      puts "Body sanitized. Adding to db."
+      puts "\tBody sanitized. Adding to db.\n"
       Article.find_by(url: article['original_url']).update(body: sanitized_body)
     end
     
