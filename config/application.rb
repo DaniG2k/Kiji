@@ -7,7 +7,7 @@ require 'rails/all'
 Bundler.require(:default, Rails.env)
 
 module Kiji
-  class Application < Rails::Application
+  class Application < Rails::Application    
     # Load all assets
     config.assets.precompile << Proc.new do |path|
       if path =~ /\.(css|js)\z/
