@@ -11,18 +11,36 @@ namespace :scrape do
     yesterday_range = 1.day.ago.beginning_of_day.utc..1.day.ago.end_of_day.utc
     today_articles = Article.where(:created_at => today_range)
     yesterday_articles = Article.where(:created_at => yesterday_range)
-    today_articles = today_articles.empty? ? yesterday_articles : today_articles
+    today_articles = today_articles.empty? ? yesterday_articles.order('val DESC') : today_articles.order('val DESC')
     
-    top_ten_urls = today_articles.order('val DESC').limit(10).map {|article| url_encode(article.url)}.join(',')
+    # Only get body content for urls that don't already have body data in our db
+    urls = []
+    if today_articles.present?
+      while urls.size < 10
+        art = today_articles.shift
+        urls << url_encode(art.url) if article.body.nil?
+      end
+    end
     
-    key = YAML.load_file(Rails.root.join('config/secrets.yml'))['embedly_key']
+    # Only make request if we have urls to process.
+    if urls.present?
+      # Compact in case there were fewer articles than the desired size,
+      # in which case there would be nil values.
+      urls = urls.compact.join(',')
+      response = embedly_req(urls)
+      add_bodies_to_db(response)
+    end
+  end
+  
+  def embedly_req(urls)
     # Make Embedly request
     # Embedly can process a max of 10 urls at a time with a batch request.
-    puts "Making Embedly request"
-    embedly_req = "http://api.embed.ly/1/extract?key=#{key}&urls=#{top_ten_urls}&maxwidth=10&maxheight=10&format=json"
-    # Parse content
-    response = JSON.parse(open(embedly_req).read)
-    
+    key = YAML.load_file(Rails.root.join('config/secrets.yml'))['embedly_key']
+    req = "http://api.embed.ly/1/extract?key=#{key}&urls=#{urls}&maxwidth=10&maxheight=10&format=json"
+    JSON.parse(open(req).read)
+  end
+  
+  def add_bodies_to_db(response)
     puts "Processing:"
     response.each do |article|
       puts "\tTitle: #{article['title']}"
@@ -30,6 +48,5 @@ namespace :scrape do
       puts "\tBody sanitized. Adding to db.\n"
       Article.find_by(url: article['original_url']).update(body: sanitized_body)
     end
-    
   end
 end
