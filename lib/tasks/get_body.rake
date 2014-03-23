@@ -18,7 +18,7 @@ namespace :scrape do
     if today_articles.present?
       while urls.size < 10
         art = today_articles.shift
-        urls << url_encode(art.url) if article.body.nil?
+        urls << url_encode(art.url) if art.body.nil?
       end
     end
     
