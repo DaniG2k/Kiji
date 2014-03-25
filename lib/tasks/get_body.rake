@@ -2,31 +2,19 @@ namespace :scrape do
   desc "Get article body"
   task :get_body => :environment do
     require 'json'
-    # Needed for url escaping
+    # Needed for url encoding
     require 'erb'
     include ERB::Util
     
-    # Get top ten articles
-    today_range = Time.zone.now.beginning_of_day.utc..Time.zone.now.end_of_day.utc
-    yesterday_range = 1.day.ago.beginning_of_day.utc..1.day.ago.end_of_day.utc
-    today_articles = Article.where(:created_at => today_range)
-    yesterday_articles = Article.where(:created_at => yesterday_range)
-    today_articles = today_articles.empty? ? yesterday_articles.order('val DESC') : today_articles.order('val DESC')
-    
-    # Only get body content for urls that don't already have body data in our db
-    urls = []
-    if today_articles.present?
-      while urls.size < 10
-        art = today_articles.shift
-        urls << url_encode(art.url) if art.body.nil?
-      end
-    end
+    # Only get body content for urls that don't already have body data
+    # and limit to 10 for this API call.
+    urls = Article.order('created_at DESC, val DESC')
+                  .where("body IS NULL")
+                  .limit(10)
+                  .collect {|a| url_encode(a.url)}
     
     # Only make request if we have urls to process.
     if urls.present?
-      # Compact in case there were fewer articles than the desired size,
-      # in which case there would be nil values.
-      urls = urls.compact.join(',')
       response = embedly_req(urls)
       add_bodies_to_db(response)
     end

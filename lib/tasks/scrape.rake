@@ -44,7 +44,7 @@ namespace :scrape do
         puts "Querying #{url}"
         visited[url] = {}
         visited[url][:source] = format_source(feed.title)
-        visited[url][:title] = entry.title
+        visited[url][:title] = entry.title.strip
         visited[url][:tweets] = get_tweets(url)
         urls << url
       rescue NoMethodError
