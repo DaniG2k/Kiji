@@ -12,6 +12,7 @@ namespace :scrape do
                   .where("body IS NULL")
                   .limit(10)
                   .collect {|a| url_encode(a.url)}
+                  .join ','
     
     # Only make request if we have urls to process.
     if urls.present?
