@@ -15,7 +15,7 @@ ol {
 }
 
 .rounded-list{
-	a {
+	div {
 		position: relative;
 		display: block;
 		padding: .7em .7em .7em 2em;
@@ -34,7 +34,7 @@ ol {
 		  -webkit-transform: scaleX(-1); /* Chrome, Safari, Opera */
 		  -ms-transform: scaleX(-1); /* IE 9 */
 		}
-		&:before {
+		&.enumerate:before {
 			content: counter(li);
 		  counter-increment: li;
 		  position: absolute; 
