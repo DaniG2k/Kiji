@@ -5,7 +5,7 @@
 $(document).ready(function(){
   $("ol.rounded-list li").click(function(){
     $(this).find("div.bounce-summary").toggle("slide", {
-    	duration: 1000,
+    	duration: 700,
     	easing: 'easeOutBounce',
     	direction: 'up'
     });
