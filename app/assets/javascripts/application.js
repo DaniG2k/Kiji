@@ -11,13 +11,13 @@
 // about supported directives.
 //
 //= require jquery
+//= require jquery_ujs
 
 // We can require all jquery ui modules:
 // require jquery.ui.all
 // or just specific ones:
 //= require jquery.ui.effect-slide
 
-//= require jquery_ujs
 //= require foundation
 // require turbolinks
 //= require_tree .
