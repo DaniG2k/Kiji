@@ -1,19 +1,15 @@
 @import 'colors';
 
 ol {
-    counter-reset: li;
-    /* Initiate a counter */
-    list-style: none;
-    /* Remove default numbering */
-    *list-style: decimal;
-    /* Keep using default numbering for IE6/7 */
+    counter-reset: li; /* Initiate a counter */
+    list-style: none; /* Remove default numbering */
+    *list-style: decimal; /* Keep using default numbering for IE6/7 */
     font-size: 15px;
     padding: 0;
     margin-bottom: 4em;
     text-shadow: 0 1px 0 rgba(255, 255, 255, .5);
     ol {
-        margin: 0 0 0 2em;
-        /* Add some left margin for inner lists */
+        margin: 0 0 0 2em; /* Add some left margin for inner lists */
     }
 }
 .rounded-list {
@@ -55,8 +51,7 @@ ol {
       font-weight: bold;
       border-radius: 2em;
       transition: all .3s ease-out;
-      -webkit-transition: all .3s ease-out;
-      /* For Safari 3.1 to 6.0 */
+      -webkit-transition: all .3s ease-out; /* For Safari 3.1 to 6.0 */
     }
     span {
       float: right;
