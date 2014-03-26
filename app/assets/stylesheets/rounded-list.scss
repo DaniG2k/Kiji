@@ -1,18 +1,28 @@
 @import 'colors';
 
 ol {
-    counter-reset: li; /* Initiate a counter */
-    list-style: none; /* Remove default numbering */
-    *list-style: decimal; /* Keep using default numbering for IE6/7 */
-    font-size: 15px;
-    padding: 0;
-    margin-bottom: 4em;
-    text-shadow: 0 1px 0 rgba(255, 255, 255, .5);
-    ol {
-        margin: 0 0 0 2em; /* Add some left margin for inner lists */
-    }
+  counter-reset: li; /* Initiate a counter */
+  list-style: none; /* Remove default numbering */
+  *list-style: decimal; /* Keep using default numbering for IE6/7 */
+  font-size: 15px;
+  padding: 0;
+  margin-bottom: 4em;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, .5);
+  ol {
+    margin: 0 0 0 2em; /* Add some left margin for inner lists */
+  }
 }
+
 .rounded-list {
+  li{
+    margin: .5em 0;
+  }          
+  .bounce-summary{
+    display: none;
+    border: 1px dashed $light-gray-2;
+    background: $light-gray-1;
+    margin-top: 0.5em; // How far the drowpdown is from the li element
+  }
   li:focus .bounce-summary {
     display: block;
   }
@@ -60,14 +70,5 @@ ol {
       border-radius: .3em;
       font-size: 0.7em;
     }
-  }
-  li{
-    margin: .5em 0;
-  }          
-  .bounce-summary{
-    display: none;
-    border: 1px dashed $light-gray-2;
-    background: $light-gray-1;
-    margin-top: 10px;
   }
 }
