@@ -2,12 +2,12 @@
 * All this logic will automatically be available in application.js.
 * You can use CoffeeScript in this file: http://coffeescript.org/
 */
-$(document).ready(function(){
-  $("ol.rounded-list li").click(function(){
-    $(this).find("div.bounce-summary").toggle("slide", {
-    	duration: 700,
-    	easing: 'easeOutBounce',
-    	direction: 'up'
+$(document).ready(function () {
+	$("ol.rounded-list li").click(function () {
+		$(this).find("div.bounce-summary").toggle("slide", {
+			duration: 700,
+      easing: 'easeOutBounce',
+      direction: 'up'
     });
   });
 });
