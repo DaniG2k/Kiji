@@ -18,6 +18,8 @@ ol {
     margin: .5em 0;
   }          
   .bounce-summary{
+    width: 100% !important;
+    height: 100% !important;
     display: none;
     border: 1px dashed $light-gray-2;
     background: $light-gray-1;
