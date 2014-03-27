@@ -43,9 +43,10 @@ namespace :scrape do
   
   def add_bodies_to_db(response)
     puts "Processing:"
-    response.each do |article|
+    response.each_with_index do |article, idx|
       if !article['content'].nil? && !article['original_url'].nil?
-        puts "\tTitle: #{article['title']}"
+        puts "  #{idx}."
+        puts "\n\tTitle: #{article['title']}"
         puts "\tSanitizing body"
         sanitized_body = ActionView::Base.full_sanitizer.sanitize(article['content'])
         puts "\tStripping unwanted characters"
