@@ -37,7 +37,6 @@ namespace :scrape do
         puts "\tSanitizing body"
         sanitized_body = ActionView::Base.full_sanitizer.sanitize(article['content'])
         puts "\tStripping unwanted characters"
-        binding.pry
         sanitized_body = sanitized_body.strip.gsub(/\.\n/,'. ').gsub(/\n/, '')
         puts "\tAdding to db\n"
         Article.find_by(url: article['original_url']).update(body: sanitized_body)
