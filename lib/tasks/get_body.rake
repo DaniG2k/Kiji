@@ -42,5 +42,10 @@ namespace :scrape do
         Article.find_by(url: article['original_url']).update(body: sanitized_body)
       end
     end
+  rescue NoMethodError => e
+    puts "There was an error in adding the article body to db."
+    p e.message
+    p e.backtrace
+    puts "\nContinuing..."
   end
 end
