@@ -32,14 +32,16 @@ namespace :scrape do
   def add_bodies_to_db(response)
     puts "Processing:"
     response.each do |article|
-      puts "\tTitle: #{article['title']}"
-      puts "\tSanitizing body"
-      sanitized_body = ActionView::Base.full_sanitizer.sanitize(article['content'])
-      puts "\tStripping unwanted characters"
-      binding.pry
-      sanitized_body = sanitized_body.strip.gsub(/\.\n/,'. ').gsub(/\n/, '')
-      puts "\tAdding to db\n"
-      Article.find_by(url: article['original_url']).update(body: sanitized_body)
+      unless article['content'].nil? && article['original_url'].nil?
+        puts "\tTitle: #{article['title']}"
+        puts "\tSanitizing body"
+        sanitized_body = ActionView::Base.full_sanitizer.sanitize(article['content'])
+        puts "\tStripping unwanted characters"
+        binding.pry
+        sanitized_body = sanitized_body.strip.gsub(/\.\n/,'. ').gsub(/\n/, '')
+        puts "\tAdding to db\n"
+        Article.find_by(url: article['original_url']).update(body: sanitized_body)
+      end
     end
   end
 end
