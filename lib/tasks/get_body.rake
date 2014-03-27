@@ -32,7 +32,7 @@ namespace :scrape do
   def add_bodies_to_db(response)
     puts "Processing:"
     response.each do |article|
-      unless article['content'].nil? && article['original_url'].nil?
+      if !article['content'].nil? && !article['original_url'].nil?
         puts "\tTitle: #{article['title']}"
         puts "\tSanitizing body"
         sanitized_body = ActionView::Base.full_sanitizer.sanitize(article['content'])
@@ -42,10 +42,5 @@ namespace :scrape do
         Article.find_by(url: article['original_url']).update(body: sanitized_body)
       end
     end
-  rescue NoMethodError => e
-    puts "There was an error in adding the article body to db."
-    p e.message
-    p e.backtrace
-    puts "\nContinuing..."
   end
 end
