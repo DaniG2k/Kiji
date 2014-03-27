@@ -8,16 +8,28 @@ namespace :scrape do
     
     # Only get body content for urls that don't already have body data
     # and limit to 10 for this API call.
-    urls = Article.order('created_at DESC, val DESC')
-                  .where("body IS NULL")
-                  .limit(10)
-                  .collect {|a| url_encode(a.url)}
-                  .join ','
+    urls = get_n_bodyless_articles(10).collect {|article| url_encode(article.url)}.join(',')
     
     # Only make request if we have urls to process.
     if urls.present?
       response = embedly_req(urls)
       add_bodies_to_db(response)
+    end
+  end
+  
+  def get_n_bodyless_articles(n)
+    today_range = Time.zone.now.beginning_of_day.utc..Time.zone.now.end_of_day.utc
+    yesterday_range = 1.day.ago.beginning_of_day.utc..1.day.ago.end_of_day.utc
+    articles = Article.where(:created_at => today_range)
+    yesterday_articles = Article.where(:created_at => yesterday_range)
+    
+    articles = articles.empty? ? yesterday_articles : articles
+    
+    if articles.count < n
+      # Last resort. Return an array of any 10 bodyless articles.
+      Article.where("body IS NULL").limit(n)
+    else
+      articles.where('body IS NULL').order('val DESC').limit(n)
     end
   end
   
