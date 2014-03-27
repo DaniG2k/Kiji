@@ -33,8 +33,11 @@ namespace :scrape do
     puts "Processing:"
     response.each do |article|
       puts "\tTitle: #{article['title']}"
+      puts "\tSanitizing body"
       sanitized_body = ActionView::Base.full_sanitizer.sanitize(article['content'])
-      puts "\tBody sanitized. Adding to db.\n"
+      puts "\tStripping unwanted characters"
+      sanitized_body.strip!.gsub!(/\.\n/,'. ').gsub!(/\n/, '')
+      puts "\tAdding to db\n"
       Article.find_by(url: article['original_url']).update(body: sanitized_body)
     end
   end
