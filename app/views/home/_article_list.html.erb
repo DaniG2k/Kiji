@@ -16,7 +16,8 @@
 			<%= content_tag(:span, article.source) %>
 		</div>
 		<div class="bounce-summary">
-			<%= icon('eye') %> Summary:
+			<%= icon('eye') %> Summary:<br />
+			<%= article.body %>
 		</div>
 	</li>
 	<% end %>
