@@ -138,7 +138,7 @@ namespace :scrape do
     page = Mechanize.new.get(url)
     page = clean_page(:page => page, :source => source)
     body = Array.new
-    
+    binding.pry
     puts "\nGetting body for #{url}:"
     
     source_selectors.each do |src|
@@ -198,7 +198,6 @@ namespace :scrape do
   def clean_page(attrs)
     page = attrs[:page] # A Nokogiri page
     source = attrs[:source] # The article source
-    
     # Search for and remove all unwanted nodes:
     case source
     when "WSJ"
@@ -207,6 +206,7 @@ namespace :scrape do
       selectors = ["p.disclaimer", "div.comment-introduction", "noscript"]
       selectors.each {|selector| page.search(selector).remove}
     end
+    page
   end
   
   # Returns the cleaned out body as an array of paragraphs.
@@ -231,9 +231,9 @@ namespace :scrape do
           tweets: val[:tweets],
           raw_score: val[:likes] + val[:tweets]) 
         # Only perform this step if we haven't alrady scraped the body
-        if article.body.nil?
+        #if article.body.nil?
           article.body = get_body(:url => key, :source => val[:source])
-        end
+        #end
         
         article.save
       end
