@@ -166,7 +166,7 @@ namespace :scrape do
     puts "\t#{e}"
   end
   
-  # A bunch of predefined slectors to use for getting the article's body.
+  # An array of predefined slectors to use for getting the article's body.
   def get_source_selectors(src)
     case src
     when "BBC"
