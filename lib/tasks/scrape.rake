@@ -149,8 +149,7 @@ namespace :scrape do
     if body.any?
       # Attempt to remove unwanted nodes and spaces
       # before returning.
-      body = clean(body)
-      body.join(' ')
+      body = clean(body).join(' ')
       puts "\n#{body}"
       # Don't hammer their server
       sleep 5
