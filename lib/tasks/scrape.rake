@@ -138,7 +138,7 @@ namespace :scrape do
     page = Mechanize.new.get(url)
     page = clean_page(:page => page, :source => source)
     body = Array.new
-    binding.pry
+
     puts "\nGetting body for #{url}:"
     
     source_selectors.each do |src|
