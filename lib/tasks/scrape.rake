@@ -211,10 +211,15 @@ namespace :scrape do
         article.update(
           source: val[:source],
           title: val[:title],
-          body: get_body(:url => key, :source => val[:source]),
           likes: val[:likes],
           tweets: val[:tweets],
           raw_score: val[:likes] + val[:tweets])
+        
+        # Only perform this step if we haven't alrady scraped the body
+        if article.body.nil?
+          article.body = get_body(:url => key, :source => val[:source])
+        end
+        
         article.save
       end
     end
