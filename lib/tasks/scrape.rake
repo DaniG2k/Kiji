@@ -151,7 +151,7 @@ namespace :scrape do
       # before returning.
       body = clean(:body => body, :source => source)
       puts "\n#{body}"
-      # Don't hammer their server
+      # Let's be polite :)
       sleep 5
       body.join(' ')
     else
@@ -200,8 +200,10 @@ namespace :scrape do
     when "WSJ"
       body.search("span.article-chiclet").remove
     when "BBC"
-      body.search("p.disclaimer").remove
-      body.search("div.comment-introduction").remove
+      selectors = ["p.disclaimer", "div.comment-introduction", "noscript"]
+      selectors.each do |selector|
+        body.search(selector).remove
+      end
     end
     # Strip unwanted spaces
     body.collect do |elt|
@@ -221,8 +223,7 @@ namespace :scrape do
           title: val[:title],
           likes: val[:likes],
           tweets: val[:tweets],
-          raw_score: val[:likes] + val[:tweets])
-        
+          raw_score: val[:likes] + val[:tweets]) 
         # Only perform this step if we haven't alrady scraped the body
         if article.body.nil?
           article.body = get_body(:url => key, :source => val[:source])
