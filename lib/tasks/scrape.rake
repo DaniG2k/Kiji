@@ -132,14 +132,16 @@ namespace :scrape do
   # or nil if no results found.
   def get_body(attrs)
     url = attrs[:url]
-    source = get_source_selectors(attrs[:source])
+    source = attrs[:source]
+    source_selectors = get_source_selectors(attrs[:source])
     
     page = Mechanize.new.get(url)
+    page = clean_page(:page => page, :source => source)
     body = Array.new
     
     puts "\nGetting body for #{url}:"
     
-    source.each do |src|
+    source_selectors.each do |src|
       if page.search(src).any?
         body = page.search(src)
         break
@@ -149,7 +151,7 @@ namespace :scrape do
     if body.any?
       # Attempt to remove unwanted nodes and spaces
       # before returning.
-      body = clean(:body => body, :source => source)
+      body = clean_body(body)
       puts "\n#{body}"
       # Let's be polite :)
       sleep 5
@@ -191,20 +193,24 @@ namespace :scrape do
     end
   end
   
-  # Returns the cleaned out body as an array of paragraphs.
-  def clean(attrs)
-    body = attrs[:body]
-    source = attrs[:source]
+  # Returns the cleaned out page. This removes entire nodes
+  # whereas clean_body cleans out the gathered article content.
+  def clean_page(attrs)
+    page = attrs[:page] # A Nokogiri page
+    source = attrs[:source] # The article source
+    
     # Search for and remove all unwanted nodes:
     case source
     when "WSJ"
-      body.search("span.article-chiclet").remove
+      page.search("span.article-chiclet").remove
     when "BBC"
       selectors = ["p.disclaimer", "div.comment-introduction", "noscript"]
-      selectors.each do |selector|
-        body.search(selector).remove
-      end
+      selectors.each {|selector| page.search(selector).remove}
     end
+  end
+  
+  # Returns the cleaned out body as an array of paragraphs.
+  def clean_body(body)
     # Strip unwanted spaces
     body.collect do |elt|
       elt.content.strip.gsub(/\n|\r/, '').gsub(/\ +/, ' ')
