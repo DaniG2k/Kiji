@@ -149,10 +149,11 @@ namespace :scrape do
     if body.any?
       # Attempt to remove unwanted nodes and spaces
       # before returning.
-      body = clean(body).join(' ')
+      body = clean(:body => body, :source => source)
       puts "\n#{body}"
       # Don't hammer their server
       sleep 5
+      body.join(' ')
     else
       # Otherwise return nil, so we can query the DB for
       # null body entries.
@@ -191,10 +192,17 @@ namespace :scrape do
   end
   
   # Returns the cleaned out body as an array of paragraphs.
-  def clean(body)
+  def clean(attrs)
+    body = attrs[:body]
+    source = attrs[:source]
     # Search for and remove all unwanted nodes:
-    # Clean WSJ nodes
-    body.search("span.article-chiclet").remove
+    case source
+    when "WSJ"
+      body.search("span.article-chiclet").remove
+    when "BBC"
+      body.search("p.disclaimer").remove
+      body.search("div.comment-introduction").remove
+    end
     # Strip unwanted spaces
     body.collect do |elt|
       elt.content.strip.gsub(/\n|\r/, '').gsub(/\ +/, ' ')
