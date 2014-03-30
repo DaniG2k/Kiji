@@ -3,6 +3,7 @@ namespace :scrape do
   require 'json'
   require 'open-uri'
   require 'feedjira'
+  require 'mechanize'
   
   desc "Run all scrape tasks"
   task :all => [:bbc,
@@ -99,7 +100,7 @@ namespace :scrape do
     matches = entry.url.match(Regexp.union(regexes)).to_a
     matches[1..-1].compact.shift
   end
-  
+    
   def get_likes(urls)
     begin
       puts "Getting Facebook likes"
@@ -126,6 +127,81 @@ namespace :scrape do
     end
   end
   
+  # Provide the page's url and an array of css accessors
+  # The content will be either returned inside of an array
+  # or nil if no results found.
+  def get_body(attrs)
+    url = attrs[:url]
+    source = get_source_selectors(attrs[:source])
+    
+    page = Mechanize.new.get(url)
+    body = Array.new
+    
+    puts "\nGetting body for #{url}:"
+    
+    source.each do |src|
+      if page.search(src).any?
+        body = page.search(src)
+        break
+      end
+    end
+    
+    if body.any?
+      # Attempt to remove unwanted nodes and spaces
+      # before returning.
+      body = clean(body)
+      body.join(' ')
+      puts "\n#{body}"
+      # Don't hammer their server
+      sleep 5
+    else
+      # Otherwise return nil, so we can query the DB for
+      # null body entries.
+      nil
+    end
+  rescue Exception => e
+    puts "An exception occurred while attempting to get an article's body :("
+    puts "\tUrl: #{url}"
+    puts "\tSource: #{source}"
+    puts "\t#{e}"
+  end
+  
+  # A bunch of predefined slectors to use for getting the article's body.
+  def get_source_selectors(src)
+    case src
+    when "BBC"
+      ["div.story-body p", "div.map-body p"]
+    when "CNN"
+      ["div.cnn_strycntntlft p"]
+    when "Chosun Ilbo"
+      ["div.article p"]
+    #when "New York Times"
+    when "Nippon.com"
+      ["div#detail_contents"]
+    #when "The Economist"
+    #when "The Guardian"
+    when "The Japan Daily Press"
+      ["div.post p"]
+    when "Tokyo Reporter"
+      ["div.post p"]
+    when "WSJ"
+      ["div.articleBody p", "article.articleBody p"]
+    else
+      []
+    end
+  end
+  
+  # Returns the cleaned out body as an array of paragraphs.
+  def clean(body)
+    # Search for and remove all unwanted nodes:
+    # Clean WSJ nodes
+    body.search("span.article-chiclet").remove
+    # Strip unwanted spaces
+    body.collect do |elt|
+      elt.content.strip.gsub(/\n|\r/, '').gsub(/\ +/, ' ')
+    end
+  end
+  
   def add_to_db(visited)
     # Only add to database if links were visited.
     if visited.present?
@@ -136,6 +212,7 @@ namespace :scrape do
         article.update(
           source: val[:source],
           title: val[:title],
+          body: get_body(:url => key, :source => val[:source]),
           likes: val[:likes],
           tweets: val[:tweets],
           raw_score: val[:likes] + val[:tweets])
