@@ -182,7 +182,8 @@ namespace :scrape do
     when "Nippon.com"
       ["div#detail_contents"]
     #when "The Economist"
-    #when "The Guardian"
+    when "The Guardian"
+      ["div.article-body-blocks p"]
     when "The Japan Daily Press"
       ["div.post p"]
     when "Tokyo Reporter"
