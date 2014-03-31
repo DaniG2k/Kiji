@@ -177,7 +177,8 @@ namespace :scrape do
       ["div.cnn_strycntntlft p"]
     when "Chosun Ilbo"
       ["div.article p"]
-    #when "New York Times"
+    when "New York Times"
+      ["p.story-content"]
     when "Nippon.com"
       ["div#detail_contents"]
     #when "The Economist"
