@@ -6,7 +6,8 @@ namespace :scrape do
   require 'mechanize'
   
   desc "Run all scrape tasks"
-  task :all => [:bbc,
+  task :all => [:asahi,
+                :bbc,
                 :chosun,
                 :cnn,
                 :economist,
@@ -68,6 +69,8 @@ namespace :scrape do
   def format_source(src)
     src.strip!
     case src.downcase
+    when /asahi/
+      "Asahi Shimbun"
     when /bbc/
       "BBC"
     when /chosun/
@@ -171,6 +174,8 @@ namespace :scrape do
   # An array of predefined slectors to use for getting the article's body.
   def get_source_selectors(src)
     case src
+    when "Asahi Shimbun"
+      ["div.body p"]
     when "BBC"
       ["div.story-body p", "div.map-body p"]
     when "CNN"
