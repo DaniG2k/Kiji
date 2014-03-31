@@ -178,7 +178,7 @@ namespace :scrape do
     when "Chosun Ilbo"
       ["div.article p"]
     when "New York Times"
-      ["p.story-content"]
+      ["p.story-content", "p.story-body-text"]
     when "Nippon.com"
       ["div#detail_contents"]
     #when "The Economist"
