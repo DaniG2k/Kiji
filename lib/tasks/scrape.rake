@@ -232,9 +232,9 @@ namespace :scrape do
           tweets: val[:tweets],
           raw_score: val[:likes] + val[:tweets]) 
         # Only perform this step if we haven't alrady scraped the body
-        #if article.body.nil?
+        if article.body.nil?
           article.body = get_body(:url => key, :source => val[:source])
-        #end
+        end
         
         article.save
       end
