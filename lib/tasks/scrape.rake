@@ -235,7 +235,6 @@ namespace :scrape do
         if article.body.nil?
           article.body = get_body(:url => key, :source => val[:source])
         end
-        
         article.save
       end
     end
