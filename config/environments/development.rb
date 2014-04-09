@@ -14,8 +14,20 @@ Kiji::Application.configure do
   config.action_controller.perform_caching = false
 
   # Don't care if the mailer can't send.
-  config.action_mailer.raise_delivery_errors = false
-
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.delivery_method = :smtp
+  # Specify what domain to use for mailer URLs
+  config.action_mailer.default_url_options = {host: "localhost:3000"}
+  config.action_mailer.smtp_settings = {
+      :address              => 'smtp.gmail.com',
+      :port                 => 587,
+      :domain               => 'gmail.com',
+      :user_name            => Rails.application.secrets.email['user'],
+      :password             => Rails.application.secrets.email['pass'],
+      :authentication       => 'login',
+      :enable_starttls_auto => true
+  }
+  
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
 
@@ -36,4 +48,13 @@ Kiji::Application.configure do
     Bullet.rails_logger = true
     Bullet.add_footer = true
   end
+  
+  config.middleware.use ExceptionNotification::Rack,
+  # Only warn of failed rake tasks. Comment this for all failure notifications.
+    :ignore_if => lambda { |env, exception| !env[:rake?] },
+    :email => {
+      :sender_address => %{"notifier" daniele.pestilli@gmail.com},
+      :exception_recipients => %w(daniele.pestilli@gmail.com)
+    }
+    ExceptionNotifier::Rake.configure
 end
