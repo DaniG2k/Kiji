@@ -1,4 +1,5 @@
 Kiji::Application.configure do
+  require 'exception_notification/rake'
   # Settings specified here will take precedence over those in config/application.rb.
 
   # In the development environment your application's code is reloaded on
@@ -56,5 +57,5 @@ Kiji::Application.configure do
       :sender_address => %{"notifier" daniele.pestilli@gmail.com},
       :exception_recipients => %w(daniele.pestilli@gmail.com)
     }
-    ExceptionNotifier::Rake.configure
+   ExceptionNotifier::Rake.configure
 end

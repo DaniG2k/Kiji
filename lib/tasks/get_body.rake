@@ -36,7 +36,6 @@ namespace :scrape do
   def embedly_req(urls)
     # Make Embedly request
     # Embedly can process a max of 10 urls at a time with a batch request.
-    
     key = Rails.application.secrets.embedly_key
     req = "http://api.embed.ly/1/extract?key=#{key}&urls=#{urls}&maxwidth=10&maxheight=10&format=json"
     JSON.parse(open(req).read)

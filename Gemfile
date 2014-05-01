@@ -51,7 +51,8 @@ gem 'font-awesome-sass'
 gem 'poltergeist'
 gem 'foundation-rails'
 gem 'will_paginate-foundation'
-gem 'exception_notification-rake'
+gem 'exception_notification', '4.1.0.rc1'
+gem 'exception_notification-rake', '0.2.0.rc1'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
