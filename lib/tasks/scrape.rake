@@ -29,6 +29,7 @@ namespace :scrape do
   # }
   def fetch_rss_data(rss, regexes)
     feed = Feedjira::Feed.fetch_and_parse(rss)
+    raise BrokenRss, "The rss feed #{rss} does not seem to be working" if feed == 200
     visited = {}
     #unvisited = []
     
