@@ -9,13 +9,14 @@ class HomeController < ApplicationController
     @yesterday_articles = Article.where(:created_at => yesterday_range)
     
     @today_articles = @today_articles.empty? ? @yesterday_articles : @today_articles
-
-    @top_three = @today_articles.order('val DESC').limit(3).to_a
     
-    @today_articles = @today_articles.where.not(id: [@top_three[0].id,
-                @top_three[1].id, @top_three[2].id])
-                .order("#{sort_column} #{sort_direction}")
-                .paginate(page: params[:page], :per_page => 10)
+    #@top_three = @today_articles.order('val DESC').limit(3).to_a
+    #@today_articles = @today_articles.where.not(id: [@top_three[0].id,
+    #            @top_three[1].id, @top_three[2].id])
+    #            .order("#{sort_column} #{sort_direction}")
+    #            .paginate(page: params[:page], :per_page => 10)
+    @today_articles = @today_articles.order("#{sort_column} #{sort_direction}")
+                      .paginate(page: params[:page], :per_page => 10)
   end
   
   def yesterday
