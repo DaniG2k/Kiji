@@ -27,9 +27,11 @@ namespace :scrape do
   #  :source => '',
   #  :tweets => ''}
   # }
+    
   def fetch_rss_data(rss, regexes)
-    feed = Feedjira::Feed.fetch_and_parse(rss)
-    raise BrokenRss, "The rss feed #{rss} does not seem to be working" if feed == 200
+    failure_callback = lambda {|curl, err| RakeMailer.failed_rake_task(method: "fetch_rss_data", rss: rss, curl: curl, error: err).deliver}
+    feed = Feedjira::Feed.fetch_and_parse(rss, on_failure: failure_callback)
+    
     visited = {}
     #unvisited = []
     
