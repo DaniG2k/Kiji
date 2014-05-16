@@ -2,6 +2,7 @@ desc "Compute the zscore for raw scores"
 task :zscore => :environment do
   require 'statistics'
   puts "Computing zscore for"
+  start_time = Time.zone.now
   sources = Article.pluck(:source).uniq
   sources.each do |src|
     articles = Article.where(:source => src)
@@ -14,9 +15,9 @@ task :zscore => :environment do
     # place inside an array. Else, compute the zscore.
     zscores = x.one? ? [-3.0] : x.zscore
     zscores.each_with_index do |zscore, i|
-      a = Article.find_by(:url => urls[i])
-      a.val = zscore
-      a.save
+      Article.find_by(:url => urls[i]).update(:val => zscore)
     end
   end
+  end_time = Time.zone.now
+  puts "Zscore time elapsed: #{end_time - start_time} seconds"
 end

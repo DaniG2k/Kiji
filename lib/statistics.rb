@@ -1,10 +1,6 @@
-module Enumerable
-  def sum
-    reduce(:+)
-  end
-  
+module Enumerable  
   def mean
-    sum.to_f / length
+    reduce(:+).to_f / length
   end
 
   def sample_variance
