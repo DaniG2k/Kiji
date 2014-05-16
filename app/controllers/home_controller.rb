@@ -16,7 +16,7 @@ class HomeController < ApplicationController
     #            .order("#{sort_column} #{sort_direction}")
     #            .paginate(page: params[:page], :per_page => 10)
     @today_articles = @today_articles.order("#{sort_column} #{sort_direction}")
-                      .paginate(page: params[:page], :per_page => 10)
+                      .paginate(page: params[:page], :per_page => result_num)
   end
   
   def yesterday
@@ -37,13 +37,17 @@ class HomeController < ApplicationController
   def all
     @all_articles = Article.all.order('val DESC')
                 .order("#{sort_column} #{sort_direction}")
-                .paginate(page: params[:page], :per_page => 10)
+                .paginate(page: params[:page], :per_page => result_num)
   end
   
   def about
   end
   
   private
+  
+  def result_num
+    25
+  end
   
   def sort_column
     %w(val title source).include?(params[:sort]) ? params[:sort] : 'val'
@@ -56,6 +60,6 @@ class HomeController < ApplicationController
   def get_articles_within(range)
     Article.where(:created_at => range)
     .order("#{sort_column} #{sort_direction}")
-    .paginate(page: params[:page], :per_page => 10)
+    .paginate(page: params[:page], :per_page => result_num)
   end
 end
