@@ -28,10 +28,12 @@
 		<% if @searched %>
 			<%= render 'search_results' %>
 		<% else %>
-		Sort by:
+		<p class="text-center">
+			Sort by:
 			<%= sortable('val', 'Value') %> <%= icon('sort-numeric-desc') %>
 			<%= sortable('title') %> <%= icon('sort-alpha-asc') %>
 			<%= sortable('source') %> <%= icon('sort-amount-asc') %>
+		</p>
 			<%= render('article_list', :articles => @today_articles) %>
 			<%= will_paginate @today_articles, renderer: FoundationPagination::Rails %>
 			<%= render 'buttons' %>
