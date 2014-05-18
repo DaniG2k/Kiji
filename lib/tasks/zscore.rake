@@ -8,7 +8,7 @@ task :zscore => :environment do
     articles = Article.where(:source => src)
     urls = articles.pluck(:url)
     raw_scores = articles.pluck(:raw_score)
-    puts "\t#{src} (scoring #{x.size} elements)"
+    puts "\t#{src} (scoring #{raw_scores.size} elements)"
     
     # Check if there's not enough data to calculate zscore.
     # If there's a single raw score, lower default value and
