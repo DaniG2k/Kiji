@@ -13,10 +13,11 @@ module Enumerable
   end
   
   def zscore
-    if standard_deviation.zero?
+    stdev = standard_deviation
+    if stdev.zero?
       Array.new(length, 0)
     else
-      collect { |v| (v - mean) / standard_deviation } 
+      collect { |v| (v - mean) / stdev } 
     end
   end
 end
