@@ -1,10 +1,10 @@
-module Enumerable  
+class Array
   def mean
     reduce(:+).to_f / length
   end
 
   def sample_variance
-    sum = inject(0){ |acc, i| acc + (i - mean)**2 }
+    sum = reduce { |acc, i| acc + (i - mean)**2 }
     1 / length.to_f * sum
   end
 
