@@ -4,7 +4,8 @@ class Array
   end
 
   def sample_variance
-    sum = reduce { |acc, i| acc + (i - mean)**2 }
+    m = mean
+    sum = reduce { |acc, i| acc + (i - m)**2 }
     1 / length.to_f * sum
   end
 
@@ -14,10 +15,11 @@ class Array
   
   def zscore
     stdev = standard_deviation
+    m = mean
     if stdev.zero?
       Array.new(length, 0)
     else
-      collect { |v| (v - mean) / stdev } 
+      collect { |v| (v - m) / stdev } 
     end
   end
 end
