@@ -14,7 +14,7 @@ namespace :scrape do
                 :guardian,
                 :jdp,
                 :jt,
-                :newschina,
+                #:newschina,
                 :nippon,
                 :nyt,
                 :tokyoreporter,               
@@ -89,6 +89,8 @@ namespace :scrape do
       "The Japan Times"
     when /nippon\.com/
       "Nippon.com"
+    when /newschina/
+      "NewsChina"
     when /nyt/
       "New York Times"
     when /tokyo reporter/
@@ -177,6 +179,7 @@ namespace :scrape do
   
   # An array of predefined slectors to use for getting the article's body.
   def get_source_selectors(src)
+    binding.pry
     case src
     when "Asahi Shimbun"
       ["div.body p"]
