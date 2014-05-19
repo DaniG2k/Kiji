@@ -14,6 +14,7 @@ namespace :scrape do
                 :guardian,
                 :jdp,
                 :jt,
+                :newschina,
                 :nippon,
                 :nyt,
                 :tokyoreporter,               
