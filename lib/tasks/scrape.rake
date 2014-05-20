@@ -13,7 +13,8 @@ namespace :scrape do
                 :economist,
                 :guardian,
                 :jdp,
-                :jt,
+                :japantimes,
+                :japantoday,
                 #:newschina,
                 :nippon,
                 :nyt,
@@ -87,6 +88,8 @@ namespace :scrape do
       "The Guardian"
     when /japan times/
       "The Japan Times"
+    when /japan today/
+      "Japan Today"
     when /nippon\.com/
       "Nippon.com"
     when /newschina/
@@ -179,7 +182,6 @@ namespace :scrape do
   
   # An array of predefined slectors to use for getting the article's body.
   def get_source_selectors(src)
-    binding.pry
     case src
     when "Asahi Shimbun"
       ["div.body p"]
@@ -198,6 +200,8 @@ namespace :scrape do
       ["div.article-body-blocks p"]
     when "The Japan Daily Press"
       ["div.post p"]
+    when "Japan Today"
+      ['div#article_content p']
     when "Tokyo Reporter"
       ["div.post p"]
     when "WSJ"
@@ -219,6 +223,8 @@ namespace :scrape do
     when "BBC"
       selectors = ["p.disclaimer", "div.comment-introduction", "noscript"]
       selectors.each {|selector| page.search(selector).remove}
+    when "Japan Today"
+      page.search('div#article_content p.article_smalltext').remove
     end
     page
   end
