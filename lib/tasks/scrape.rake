@@ -65,7 +65,7 @@ namespace :scrape do
     # a list of urls.
     if urls.present?
       likes = get_likes(urls)
-      likes.each {|fb| visited["#{fb['url']}"][:likes] = fb['total_count']}
+      likes.each { |fb| visited["#{fb['url']}"][:likes] = fb['total_count'] }
     end
     # Return the visited hash
     visited
@@ -225,8 +225,9 @@ namespace :scrape do
       selectors.each {|selector| page.search(selector).remove}
     when "Japan Today"
       page.search('div#article_content p.article_smalltext').remove
+    else
+      page
     end
-    page
   end
   
   # Returns the cleaned out body as an array of paragraphs.
