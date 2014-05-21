@@ -20,7 +20,7 @@ class Array
     if stdev.zero?
       Array.new(length, 0)
     else
-      collect { |v| (v - m) / stdev } 
+      collect { |v| (v - m) / stdev }
     end
   end
 end
