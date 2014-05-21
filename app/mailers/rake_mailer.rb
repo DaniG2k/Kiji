@@ -1,5 +1,5 @@
 class RakeMailer < ActionMailer::Base
-  default from: "#{Rails.application.secrets.email['user']}@gmail.com"
+  default from: Rails.application.secrets.email['full_email']
 
   # Subject can be set in your I18n file at config/locales/en.yml
   # with the following lookup:
@@ -12,8 +12,8 @@ class RakeMailer < ActionMailer::Base
     @curl = args[:curl]
     @error = args[:error]
     
-    recipient = "#{Rails.application.secrets.email['user']}@gmail.com"
+    recipient = Rails.application.secrets.email['full_email']
     
-    mail to: recipient, subject: "Rake task failure"
+    mail(to: recipient, subject: "Rake task failure")
   end
 end
