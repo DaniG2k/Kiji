@@ -5,7 +5,8 @@ Kiji::Application.routes.draw do
   get 'month', to: 'home#month'
   get 'week', to: 'home#week'
   get 'yesterday', to: 'home#yesterday'
-  resource :contact, only: [:new, :create]
+  
+  resources :contacts, only: [:new, :create]
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
