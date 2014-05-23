@@ -17,10 +17,6 @@ class Array
   def zscore
     stdev = standard_deviation
     m = mean
-    if stdev.zero?
-      Array.new(length, 0)
-    else
-      collect { |v| (v - m) / stdev }
-    end
+    stdev.zero? ? Array.new(length, 0) : collect { |v| (v - m) / stdev }
   end
 end
