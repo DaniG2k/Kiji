@@ -1,5 +1,5 @@
 class Array
-  def mean(len=self.length)
+  def mean(len = length)
     reduce(:+).to_f / len
   end
 
