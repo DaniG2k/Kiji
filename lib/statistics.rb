@@ -7,7 +7,7 @@ class Array
     len = length
     m = mean(len)
     sum = reduce { |acc, i| acc + (i - m)**2 }
-    1 / len.to_f * sum
+    sum.to_f / len
   end
 
   def standard_deviation
