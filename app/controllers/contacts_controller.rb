@@ -6,9 +6,9 @@ class ContactsController < ApplicationController
   def create
     @contact = Contact.new(params[:contact])
     if @contact.valid?
-      flash.now[:notice] = 'Thank you for your message. We will contact you soon!'
+      flash[:notice] = 'Thank you for your message. We will contact you soon!'
     else
-      flash.now[:error] = 'Cannot send message.'
+      flash[:error] = 'Cannot send message.'
       render :new
     end
   end
