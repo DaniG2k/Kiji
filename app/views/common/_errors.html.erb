@@ -1,3 +1,4 @@
+<%# Pass in the obj to this partial with :obj => @myvar %>
 <% if obj.errors.any? %>
 	<%= obj.errors.full_messages.each { |message| message } %>
 <% end %>
