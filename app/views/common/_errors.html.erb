@@ -1,0 +1,3 @@
+<% if obj.errors.any? %>
+	<%= obj.errors.full_messages.each { |message| message } %>
+<% end %>

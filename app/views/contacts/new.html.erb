@@ -1,7 +1,9 @@
-<% title 'Contact' %>
+<% title t('.title') %>
 <div class="row">
   <div class="large-6 medium-6 columns">
   	<%= render 'common/messages' %>
+  	<%= render 'common/errors', :obj => @contact %>
+  	
   	<%= form_for @contact do |f| %>
   		<p>
 		    <%= f.label :name %><br>

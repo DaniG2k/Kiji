@@ -21,3 +21,8 @@
 
 en:
   title: "Kiji"
+  contacts:
+    create:
+      title: 'Thank you!'
+    new:
+      title: 'Contact'
