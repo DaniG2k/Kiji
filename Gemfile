@@ -37,6 +37,7 @@ group :development, :test do
   # Use sqlite3 as the database for Active Record
   gem 'sqlite3'
   gem 'bullet'
+  gem 'sunspot_solr'
 end
 
 gem 'pg'
@@ -44,6 +45,7 @@ gem 'pry'
 gem 'whenever', :require => false
 gem 'mechanize'
 gem 'feedjira'
+gem 'sunspot_rails'
 gem 'capybara'
 gem 'capybara-screenshot'
 gem 'jquery-ui-rails'
