@@ -2,3 +2,5 @@
 <% @searched.results.each do |result| %>
 	<%= link_to "#{result.title}", result.url, :target => "_blank" %><br />
 <% end %>
+<br />
+<%= will_paginate @searched.results %>

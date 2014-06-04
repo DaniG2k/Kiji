@@ -45,7 +45,10 @@ gem 'pry'
 gem 'whenever', :require => false
 gem 'mechanize'
 gem 'feedjira'
+
 gem 'sunspot_rails'
+gem 'progress_bar'
+
 gem 'capybara'
 gem 'capybara-screenshot'
 gem 'jquery-ui-rails'

@@ -6,6 +6,7 @@ class HomeController < ApplicationController
         fulltext "#{params[:search]}" do 
           fields(:title, :body)
         end
+        paginate(:page => params[:page] || 1)
       end
     else
       @searched = nil
