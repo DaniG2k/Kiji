@@ -3,4 +3,4 @@
 	<%= link_to "#{result.title}", result.url, :target => "_blank" %><br />
 <% end %>
 <br />
-<%= will_paginate @searched.results %>
+<%= will_paginate @searched.results, renderer: FoundationPagination::Rails %>
