@@ -1,8 +1,16 @@
 class HomeController < ApplicationController
   helper_method :sort_column, :sort_direction
   def index
-    @searched = params[:search].present? ? Article.search {fulltext params[:search]} : nil
-        
+    if params[:search].present?
+      @searched = Article.search do
+        fulltext "#{params[:search]}" do 
+          fields(:title, :body)
+        end
+      end
+    else
+      @searched = nil
+    end
+    
     today_range = Time.zone.now.beginning_of_day.utc..Time.zone.now.end_of_day.utc
     yesterday_range = 1.day.ago.beginning_of_day.utc..1.day.ago.end_of_day.utc
     @today_articles = Article.where(:created_at => today_range)
