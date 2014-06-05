@@ -46,6 +46,7 @@ gem 'whenever', :require => false
 gem 'mechanize'
 gem 'feedjira'
 
+# Sunspot
 gem 'sunspot_rails'
 gem 'progress_bar'
 

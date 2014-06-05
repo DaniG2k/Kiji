@@ -3,7 +3,7 @@ class HomeController < ApplicationController
   def index
     if params[:search].present?
       @searched = Article.search do
-        fulltext "#{params[:search]}" do 
+        fulltext params[:search] do 
           fields(:title, :body)
         end
         paginate(:page => params[:page] || 1)
