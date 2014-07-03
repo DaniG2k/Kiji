@@ -175,6 +175,10 @@ namespace :scrape do
       nil
     end
   rescue Exception => e
+    RakeMailer.failed_rake_task(
+      method: "get_body",
+      url: url,
+      error: "#{e}").deliver
     puts "An exception occurred while attempting to get an article's body :("
     puts "\tUrl: #{url}"
     puts "\tSource: #{source}"
@@ -227,7 +231,9 @@ namespace :scrape do
       "BBC" => ["p.disclaimer", "div.comment-introduction", "noscript"],
       "Japan Today" => ['div#article_content p.article_smalltext']
       }
-    selectors_hash[source].each {|selector| page.search(selector).remove}
+    if selectors_hash[source].present?
+      selectors_hash[source].each {|selector| page.search(selector).remove}
+    end
     page
   end
   

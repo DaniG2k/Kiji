@@ -8,6 +8,7 @@ class RakeMailer < ActionMailer::Base
   #
   def failed_rake_task(args={})
     @method = args[:method]
+    @url = args[:url]
     @rss = args[:rss]
     @curl = args[:curl]
     @error = args[:error]
