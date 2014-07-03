@@ -145,6 +145,7 @@ namespace :scrape do
   def get_body(attrs)
     url = attrs[:url]
     source = attrs[:source]
+    
     source_selectors = get_source_selectors(attrs[:source])
     
     page = Mechanize.new.get(url)
@@ -214,20 +215,20 @@ namespace :scrape do
   # Returns the cleaned out page. This removes entire nodes
   # whereas clean_body cleans out the gathered article content.
   def clean_page(attrs)
-    page = attrs[:page] # A Nokogiri page
-    source = attrs[:source] # The article source
-    # Search for and remove all unwanted nodes:
-    case source
-    when "WSJ"
-      page.search("span.article-chiclet").remove
-    when "BBC"
-      selectors = ["p.disclaimer", "div.comment-introduction", "noscript"]
-      selectors.each {|selector| page.search(selector).remove}
-    when "Japan Today"
-      page.search('div#article_content p.article_smalltext').remove
-    else
-      page
-    end
+    # A Mechanize page
+    page = attrs[:page]
+    
+    # The article source
+    source = attrs[:source]
+    
+    # Search for and remove all unwanted nodes
+    selectors_hash = {
+      "WSJ" => ["span.article-chiclet"],
+      "BBC" => ["p.disclaimer", "div.comment-introduction", "noscript"],
+      "Japan Today" => ['div#article_content p.article_smalltext']
+      }
+    selectors_hash[source].each {|selector| page.search(selector).remove}
+    page
   end
   
   # Returns the cleaned out body as an array of paragraphs.
