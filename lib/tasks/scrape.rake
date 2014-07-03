@@ -164,7 +164,7 @@ namespace :scrape do
     if body.any?
       # Attempt to remove unwanted nodes and spaces
       # before returning.
-      body = clean_body(body)
+      body = clean_article_body(body)
       puts "\n#{body}"
       # Let's be polite :)
       sleep 5
@@ -217,7 +217,7 @@ namespace :scrape do
   end
   
   # Returns the cleaned out page. This removes entire nodes
-  # whereas clean_body cleans out the gathered article content.
+  # whereas clean_article_body cleans out the gathered article content.
   def clean_page(attrs)
     # A Mechanize page
     page = attrs[:page]
@@ -238,11 +238,9 @@ namespace :scrape do
   end
   
   # Returns the cleaned out body as an array of paragraphs.
-  def clean_body(body)
-    # Strip unwanted spaces
-    body.collect do |elt|
-      elt.content.strip.gsub(/\n|\r/, '').gsub(/\ +/, ' ')
-    end
+  def clean_article_body(body)
+    # Strip unwanted spaces and newlines.
+    body.collect {|elt| elt.content.strip.gsub(/\n|\r/, '').gsub(/\ +/, ' ')}
   end
   
   def add_to_db(visited)
