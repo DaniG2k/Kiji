@@ -175,10 +175,7 @@ namespace :scrape do
       nil
     end
   rescue Exception => e
-    RakeMailer.failed_rake_task(
-      method: "get_body",
-      url: url,
-      error: "#{e}").deliver
+    RakeMailer.failed_rake_task(:method => "get_body", :url => url, :error => e).deliver
     puts "An exception occurred while attempting to get an article's body :("
     puts "\tUrl: #{url}"
     puts "\tSource: #{source}"
@@ -226,13 +223,14 @@ namespace :scrape do
     source = attrs[:source]
     
     # Search for and remove all unwanted nodes
-    selectors_hash = {
+    unwanted_nodes = {
       "WSJ" => ["span.article-chiclet"],
       "BBC" => ["p.disclaimer", "div.comment-introduction", "noscript"],
       "Japan Today" => ['div#article_content p.article_smalltext']
       }
-    if selectors_hash[source].present?
-      selectors_hash[source].each {|selector| page.search(selector).remove}
+    # Only remove unwanted nodes if they're present in the hash.
+    unless unwanted_nodes[source].nil?
+      unwanted_nodes[source].each {|node| page.search(node).remove}
     end
     page
   end
