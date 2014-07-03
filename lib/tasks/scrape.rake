@@ -240,7 +240,7 @@ namespace :scrape do
   # Returns the cleaned out body as an array of paragraphs.
   def clean_article_body(body)
     # Strip unwanted spaces and newlines.
-    body.collect {|elt| elt.content.strip.gsub(/\n|\r/, '').gsub(/\ +/, ' ')}
+    body.collect { |elt| elt.content.strip.gsub(/\n|\r/, '').gsub(/\ +/, ' ') }
   end
   
   def add_to_db(visited)
