@@ -14,9 +14,9 @@
 //= require jquery_ujs
 
 // We can require all jquery ui modules:
-// require jquery.ui.all
+// require jquery-ui
 // or just specific ones:
-//= require jquery.ui.effect-slide
+//= require jquery-ui/effect-slide
 
 //= require foundation
 // require turbolinks
