@@ -1,9 +1,10 @@
 @import "colors";
 
-.footer-bottom {
+.footer {
   //background: #fff image-url("JapanesePattern.png") repeat-x left top;
 	background: $light-gray-1;
 	border-top: 1px solid $light-gray-2;
 	padding: 24px 0 10px;
 	color: #717171;
+	max-width: none;
 }
