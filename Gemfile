@@ -53,7 +53,7 @@ gem 'progress_bar'
 gem 'capybara'
 gem 'capybara-screenshot'
 gem 'jquery-ui-rails'
-gem 'font-awesome-sass'
+gem "font-awesome-rails"
 gem 'poltergeist'
 gem 'foundation-rails'
 gem 'will_paginate-foundation'

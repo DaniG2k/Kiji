@@ -30,9 +30,9 @@
 		<% else %>
 		<p class="text-center">
 			Sort by:
-			<%= sortable('val', 'Value') %> <%= icon('sort-numeric-desc') %>
-			<%= sortable('title') %> <%= icon('sort-alpha-asc') %>
-			<%= sortable('source') %> <%= icon('sort-amount-asc') %>
+			<%= sortable('val', 'Value') %> <%= fa_icon('sort-numeric-desc') %>
+			<%= sortable('title') %> <%= fa_icon('sort-alpha-asc') %>
+			<%= sortable('source') %> <%= fa_icon('sort-amount-asc') %>
 		</p>
 			<%= render('article_list', :articles => @today_articles) %>
 			<%= will_paginate @today_articles, renderer: FoundationPagination::Rails %>

@@ -11,13 +11,13 @@
 		<div class="enumerate">
 			<%= link_to article.title, article.url, :target => "_blank" %>
 			<span>
-				<%= icon('facebook-square') %> <%= article.likes %>
-				<%= icon('twitter-square') %> <%= article.tweets %>
+				<%= fa_icon('facebook-square') %> <%= article.likes %>
+				<%= fa_icon('twitter-square') %> <%= article.tweets %>
 			</span>
 			<%= content_tag(:span, article.source) %>
 		</div>
 		<div class="bounce-summary">
-			<%= icon('eye') %> Summary:<br />
+			<%= fa_icon('eye') %> Summary:<br />
 			<%= article.body %>
 		</div>
 	</li>
