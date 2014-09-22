@@ -1,5 +1,4 @@
 namespace :scrape do
-  #require 'mechanize'
   require 'json'
   require 'open-uri'
   require 'feedjira'
