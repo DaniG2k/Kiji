@@ -17,8 +17,8 @@ namespace :scrape do
                 #:newschina,
                 :nippon,
                 :nyt,
-                :tokyoreporter,               
-                :wsj]
+                :tokyoreporter]
+                #:wsj]
   
   # Gather RSS feed and run FQL and Twitter queries on those urls
   # Returns a visited hash
