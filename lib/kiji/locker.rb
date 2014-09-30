@@ -1,5 +1,7 @@
 module Kiji
   class Locker
+    attr_accessor :lockfile
+    
     def initialize(lockfile='status.lock')
       @lockfile = lockfile
     end
