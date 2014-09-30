@@ -5,6 +5,7 @@ module Kiji
     # TODO
     # - Integrate lock system
     # - Build a worker that goes through all articles to assemble data
+    # - Add percentage indicator to update process
     attr_accessor :rss, :regexes
     def initialize(params={})
       @rss = params.fetch :rss, ''
