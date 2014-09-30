@@ -2,6 +2,9 @@ module Kiji
   require 'feedjira'
   
   class Worker
+    # TODO
+    # - Integrate lock system
+    # - Build a worker that goes through all articles to assemble data
     attr_accessor :rss, :regexes
     def initialize(params={})
       @rss = params.fetch :rss, ''
