@@ -108,6 +108,5 @@ module Kiji
         src
       end
     end
-    
   end # end Worker
 end # end Kiji module
