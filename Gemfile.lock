@@ -230,7 +230,7 @@ DEPENDENCIES
   jquery-rails
   jquery-ui-rails
   mechanize
-  passenger (= 4.0.48)
+  passenger
   pg
   poltergeist
   progress_bar

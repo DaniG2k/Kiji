@@ -201,6 +201,8 @@ namespace :scrape do
       ["div.article-body-blocks p"]
     when "The Japan Daily Press"
       ["div.post p"]
+    when "The Japan Times"
+      ['div#jtarticle p']
     when "Japan Today"
       ['div#article_content p']
     when "Tokyo Reporter"
