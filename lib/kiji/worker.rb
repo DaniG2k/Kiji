@@ -1,6 +1,4 @@
 module Kiji
-  require 'feedjira'
-  require 'mechanize'
   class Worker
     # TODO
     # - Integrate lock system

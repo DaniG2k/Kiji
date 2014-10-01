@@ -1,8 +1,5 @@
 #!/usr/bin/ruby
 module Kiji
-  require 'json'
-  require 'open-uri'
-  
   class Socializer
     attr_accessor :tw_url, :fb_urls
     def initialize(params={})
