@@ -7,7 +7,7 @@ module Kiji
     end
 
     def create
-      File.open(@lockfile, 'a') {|f| f.write("Lock file last written: #{Time.now}\n")}
+      File.open(@lockfile, 'a') {|f| f.write("Lock file last written: #{Time.zone.now}\n")}
     end
 
     def exists?
