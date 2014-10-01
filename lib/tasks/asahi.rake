@@ -1,8 +1,10 @@
 namespace :scrape do
   desc "Scrape news from Asahi Shimbun's English website"
   task :asahi => :environment do
-    regexes = [/(^.*asahi\.com.*)/]
-    visited = fetch_rss_data("http://ajw.asahi.com/feed/", regexes)
-    add_to_db(visited)
+    worker = Kiji::Worker.new(
+      :rss => "http://ajw.asahi.com/feed/",
+      :regexes => [/(^.*asahi\.com.*)/])
+    worker.fetch_rss_data
+    worker.add_to_db
   end
 end

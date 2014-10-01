@@ -1,8 +1,10 @@
 namespace :scrape do
   desc "Scrape news from Chosun Ilbo's website"
   task :chosun => :environment do
-    regexes = [/(^.*chosun\.com.*html)/]
-    visited = fetch_rss_data("http://english.chosun.com/site/data/rss/rss.xml", regexes)
-    add_to_db(visited)
+    worker = Kiji::Worker.new(
+      :rss => "http://english.chosun.com/site/data/rss/rss.xml",
+      :regexes => [/(^.*chosun\.com.*html)/])
+    worker.fetch_rss_data
+    worker.add_to_db
   end
 end

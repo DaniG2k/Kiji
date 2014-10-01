@@ -8,9 +8,12 @@ namespace :scrape do
             
   desc "Run all Guardian scrape tasks"
   task :guardian => :environment do
-    regexes = [/(^http.*)/]
-    feeds.each do |feed| 
-      add_to_db(fetch_rss_data(feed, regexes))
+    feeds.each do |feed|
+      worker = Kiji::Worker.new(
+        :rss => feed,
+        :regexes => [/(^http.*)/])
+      worker.fetch_rss_data
+      worker.add_to_db
     end
   end
 end

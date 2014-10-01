@@ -6,9 +6,12 @@ namespace :scrape do
              
   desc "Run all Economist scrape tasks"
   task :economist => :environment do
-    regexes = [/(^.*economist\.com.*)\?.*$/]
     feeds.each do |feed|
-      add_to_db(fetch_rss_data(feed, regexes))
+      worker = Kiji::Worker.new(
+        :rss => feed,
+        :regexes => [/(^.*economist\.com.*)\?.*$/])
+      worker.fetch_rss_data
+      worker.add_to_db
     end
   end
 end

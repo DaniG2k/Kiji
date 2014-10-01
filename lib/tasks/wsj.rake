@@ -6,9 +6,12 @@ namespace :scrape do
   
   desc "Run all WSJ scrape tasks"
   task :wsj => :environment do
-    regexes = [/(^.*wsj\.com.*)\?/]
     feeds.each do |feed|
-      add_to_db(fetch_rss_data(feed, regexes))
+      worker = Kiji::Worker.new(
+        :rss => feed,
+        :regexes => [/(^.*wsj\.com.*)\?/])
+      worker.fetch_rss_data
+      worker.add_to_db
     end
   end
 end
