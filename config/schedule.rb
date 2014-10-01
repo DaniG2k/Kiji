@@ -25,7 +25,6 @@ set :output, {:error => File.join(Whenever.path, 'log', 'whenever_error.log'),
 env  = 'RAILS_ENV=production'
 chdir = "cd #{Whenever.path}"
 all = "#{env} rake scrape:all"
-zscore = "#{env} rake zscore"
 get_body = "#{env} rake scrape:get_body"
 clobber = "#{env} rake assets:clobber"
 screenshots = "#{env} rake scrape:screenshots"
@@ -34,5 +33,5 @@ nginx_recache = "touch #{Whenever.path}/tmp/restart.txt"
 
 every 3.hours do
   #command [chdir, all, zscore, clobber, screenshots, precompile, nginx_recache].join(' && ')
-  command [chdir, all, zscore, get_body].join(' && ')
+  command [chdir, all, get_body].join(' && ')
 end

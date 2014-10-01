@@ -21,3 +21,4 @@
 /config/secrets.yml
 /solr/data
 /solr/development/
+/lib/tasks/scrape.lock
