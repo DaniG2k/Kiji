@@ -1,7 +1,6 @@
 module Kiji
   class Worker
     # TODO
-    # - Integrate lock system
     # - Build a worker that goes through all articles to assemble data
     # - Add percentage indicator to update process
     attr_accessor :rss, :regexes
