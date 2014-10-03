@@ -39,7 +39,7 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
-    capybara-screenshot (1.0.2)
+    capybara-screenshot (1.0.3)
       capybara (>= 1.0, < 3)
       colored
       launchy
@@ -116,7 +116,7 @@ GEM
       mini_portile (= 0.6.0)
     ntlm-http (0.1.1)
     options (2.3.2)
-    passenger (4.0.52)
+    passenger (4.0.53)
       daemon_controller (>= 1.2.0)
       rack
       rake (>= 0.8.1)

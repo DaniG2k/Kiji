@@ -11,16 +11,12 @@ namespace :scrape do
         articles = Article.where(:source => src)
         urls = articles.pluck(:url)
         raw_scores = articles.pluck(:raw_score)
+        puts "\t#{src} (scoring #{raw_scores.size} elements)"
         # Check if there's not enough data to calculate zscore.
         # If there's a single raw score, lower default value and
         # place inside an array. Else, compute the zscore.
         zscores = raw_scores.one? ? [-3.0] : raw_scores.zscore
-        zscores.each_with_index do |zscore, i|
-          $stdout.write "\r#{i+1}"
-          $stdout.flush
-          Article.find_by(:url => urls[i]).update(:val => zscore)
-        end
-        puts "\t#{src} (scoring #{raw_scores.size} elements)"
+        zscores.each_with_index {|zscore, i| Article.find_by(:url => urls[i]).update(:val => zscore)}
     end
     rescue Exception => e
       RakeMailer.failed_rake_task(method: "zscore", rss: nil, curl: nil, error: e).deliver
