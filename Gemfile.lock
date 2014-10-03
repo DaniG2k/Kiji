@@ -30,7 +30,7 @@ GEM
     addressable (2.3.6)
     arel (5.0.1.20140414130214)
     builder (3.2.2)
-    bullet (4.13.2)
+    bullet (4.14.0)
       activesupport (>= 3.0.0)
       uniform_notifier (>= 1.6.0)
     capybara (2.4.3)

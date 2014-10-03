@@ -72,8 +72,11 @@ module Kiji
       # This method is needed because a Regexp match will contain nil results
       # if there is more than one regexp in the passed in array.
       # Ignore the first entry (full url), compact nil results and return the match.
-      matches = entry.url.match(Regexp.union(@regexes)).to_a
-      matches[1..-1].compact.shift
+      if entry.url.include?('nytimes.com')
+        entry.entry_id.match(Regexp.union(@regexes)).to_a.compact.uniq.shift
+      else
+        entry.url.match(Regexp.union(@regexes)).to_a.compact.uniq.shift
+      end
     end
     
     def format_source(src)
@@ -116,10 +119,10 @@ module Kiji
     def get_body(params)
       url = params[:url]
       source = params[:source]
-      page = Mechanize.new.get(url)
-      cleaner = Kiji::Cleaner.new(:source => source)
+      page = Mechanize.new.get url
       body = Array.new
-
+      cleaner = Kiji::Cleaner.new(:source => source)
+      
       puts "\nGetting body for #{url}:"
 
       cleaner.get_source_selectors.each do |selector|
