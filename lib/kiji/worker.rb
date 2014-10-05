@@ -33,8 +33,9 @@ module Kiji
           @visited[url][:source] = format_source(feed.title)
           @visited[url][:title] = entry.title.strip
           @visited[url][:tweets] = socializer.get_tweets
-        rescue NoMethodError
-          puts "\nNo matchdata found for #{entry.url}"
+        rescue Exception => e
+          puts e.message
+          #puts "\nNo matchdata found for #{entry.url}"
           next
         end
       end # end feed.entries.each
@@ -69,14 +70,12 @@ module Kiji
     
     private
     def get_matching_url(entry)
+      outliers = ['nytimes.com', 'bbc.co.uk']
       # This method is needed because a Regexp match will contain nil results
       # if there is more than one regexp in the passed in array.
       # Ignore the first entry (full url), compact nil results and return the match.
-      if entry.url.include?('nytimes.com')
-        entry.entry_id.match(Regexp.union(@regexes)).to_a.compact.uniq.pop
-      else
-        entry.url.match(Regexp.union(@regexes)).to_a.compact.uniq.pop
-      end
+      entry = outliers.any? {|outlier| entry.url.include?(outlier)} ? entry.entry_id : entry.url
+      entry.match(Regexp.union(@regexes)).to_a.compact.uniq.pop
     end
     
     def format_source(src)
