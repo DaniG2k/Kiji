@@ -203,7 +203,7 @@ GEM
     unf_ext (0.0.6)
     uniform_notifier (1.6.2)
     webrobots (0.1.1)
-    websocket-driver (0.3.4)
+    websocket-driver (0.3.5)
     whenever (0.9.2)
       activesupport (>= 2.3.4)
       chronic (>= 0.6.3)
