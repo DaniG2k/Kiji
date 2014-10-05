@@ -73,9 +73,9 @@ module Kiji
       # if there is more than one regexp in the passed in array.
       # Ignore the first entry (full url), compact nil results and return the match.
       if entry.url.include?('nytimes.com')
-        entry.entry_id.match(Regexp.union(@regexes)).to_a.compact.uniq.shift
+        entry.entry_id.match(Regexp.union(@regexes)).to_a.compact.uniq.pop
       else
-        entry.url.match(Regexp.union(@regexes)).to_a.compact.uniq.shift
+        entry.url.match(Regexp.union(@regexes)).to_a.compact.uniq.pop
       end
     end
     
