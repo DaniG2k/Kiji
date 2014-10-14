@@ -75,7 +75,9 @@ module Kiji
       # if there is more than one regexp in the passed in array.
       # Ignore the first entry (full url), compact nil results and return the match.
       entry = outliers.any? {|outlier| entry.url.include?(outlier)} ? entry.entry_id : entry.url
-      entry.match(Regexp.union(@regexes)).to_a.compact.uniq.pop
+      entry.match(Regexp.union(@regexes))
+      # $+ contains the last match from the previous successful pattern match.
+      $+
     end
     
     def format_source(src)
