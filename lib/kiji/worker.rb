@@ -12,8 +12,7 @@ module Kiji
     def fetch_rss_data
       failure_callback = lambda do |curl, err|
         # Remove the lock file.
-        file = "#{Rails.root}/lib/tasks/scrape.lock"
-        File.delete(file) if File.exist?(file)
+        Kiji::Locker.new.unlock
         # Email failure message.
         RakeMailer.failed_rake_task(method: "fetch_rss_data", rss: @rss, curl: curl, error: err).deliver
       end
