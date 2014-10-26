@@ -56,6 +56,7 @@ module Kiji
       if @visited.present?
         puts "Adding data to the database"
         @visited.each do |key, val|
+          puts "Source: #{val[:source]}"
           article = Article.find_or_initialize_by(:url => key)
           article.source = val[:source]
           article.title = val[:title]
