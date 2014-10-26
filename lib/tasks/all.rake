@@ -14,6 +14,7 @@ namespace :scrape do
                 #:newschina,
                 :nippon,
                 :nyt,
+                :scmp,
                 :tokyoreporter,
                 #:wsj,
                 :zscore,

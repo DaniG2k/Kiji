@@ -18,7 +18,7 @@ module Kiji
       end
       feed = Feedjira::Feed.fetch_and_parse(@rss, on_failure: failure_callback)
       @visited = Hash.new
-      socializer = Kiji::Socializer.new()
+      socializer = Kiji::Socializer.new
       
       feed.entries.each do |entry|
         begin
@@ -75,13 +75,13 @@ module Kiji
     
     private
     def get_matching_url(entry)
-      outliers = ['nytimes.com', 'bbc.co.uk']
+      outliers = ['nytimes.com', 'bbc.co.uk', 'guardian']
       # This method is needed because a Regexp match will contain nil results
       # if there is more than one regexp in the passed in array.
       # Ignore the first entry (full url), compact nil results and return the match.
       entry = outliers.any? {|outlier| entry.url.include?(outlier)} ? entry.entry_id : entry.url
       entry.match(Regexp.union(@regexes))
-      # $+ contains the last match from the previous successful pattern match.
+      # $+ contains the last successful pattern match.
       $+
     end
     
@@ -110,6 +110,8 @@ module Kiji
         "NewsChina"
       when /nyt/
         "New York Times"
+      when /south china morning post/
+        "South China Morning Post"
       when /tokyo reporter/
         "Tokyo Reporter"
       when /wsj/
@@ -125,29 +127,18 @@ module Kiji
     def get_body(params)
       url = params[:url]
       source = params[:source]
-      page = Mechanize.new.get url
-      body = Array.new
-      cleaner = Kiji::Cleaner.new(:source => source)
       
-      puts "\nGetting body for #{url}:"
-
-      cleaner.get_source_selectors.each do |selector|
-        if page.search(selector).any?
-          body = page.search(selector)
-          break
-        end
-      end
-
-      if body.any?
-        cleaner.page = body
-        # Attempt to remove unwanted nodes and spaces
-        # before returning.
-        body = cleaner.clean_article_body
+      puts "\nGetting body for #{url}"
+      cleaner = Kiji::Cleaner.new(:source => source, :page => Mechanize.new.get(url))
+      cleaner.remove_unwanted_nodes!
+      
+      body = cleaner.clean_article_body
+      
+      if body.present?
         puts "\n#{body}"
         # Let's be polite :)
         sleep 5
-        # Return this value last.
-        body.join(' ')
+        return body
       else
         # Otherwise return nil, so we can query the DB for
         # null body entries.
@@ -160,6 +151,5 @@ module Kiji
       puts "\tSource: #{source}"
       puts "\t#{e}"
     end
-    
   end # end Worker
 end # end Kiji module

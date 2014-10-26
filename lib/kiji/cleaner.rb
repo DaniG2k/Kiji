@@ -5,6 +5,36 @@ module Kiji
       @page = params.fetch(:page, '')
       @source = params.fetch(:source, '')
     end
+    
+    # Returns the cleaned out page. This removes entire nodes
+    # whereas clean_article_body cleans out the gathered article content.
+    def remove_unwanted_nodes!
+      # Search for and remove all unwanted nodes
+      unwanted_nodes = {
+        "WSJ"                       => ["span.article-chiclet"],
+        "BBC"                       => ["p.disclaimer", "div.comment-introduction", "noscript"],
+        "Japan Today"               => ['div#article_content p.article_smalltext'],
+        "South China Morning Post"  => ['div.subtitle', 'div.subline-ticks', 'div.subscribe-wrapper']
+      }
+      # Only remove unwanted nodes if they're present in the hash.
+      if unwanted_nodes[@source].present?
+        unwanted_nodes[@source].each {|node| @page.search(node).remove}
+      end
+    end
+    
+    # Returns the cleaned out body as a string.
+    def clean_article_body
+      get_source_selectors.each do |selector|
+        if @page.search(selector).any?
+          @page = page.search(selector)
+          break
+        end
+      end
+      # Strip unwanted spaces and newlines.
+      @page.collect {|elt| elt.content.strip.gsub(/\n|\r/, '').gsub(/\ +/, ' ')}.join(' ')
+    end
+    
+    private
     # An array of predefined slectors to use for getting the article's body.
     def get_source_selectors
       case @source
@@ -29,6 +59,8 @@ module Kiji
         ["div.post p"]
       when "Japan Today"
         ['div#article_content p']
+      when "South China Morning Post"
+        ['[property="content:encoded"] p']
       when "Tokyo Reporter"
         ["div.post p"]
       when "WSJ"
@@ -36,27 +68,6 @@ module Kiji
       else
         []
       end
-    end
-    # Returns the cleaned out page. This removes entire nodes
-    # whereas clean_article_body cleans out the gathered article content.
-    def clean_page
-      # Search for and remove all unwanted nodes
-      unwanted_nodes = {
-        "WSJ" => ["span.article-chiclet"],
-        "BBC" => ["p.disclaimer", "div.comment-introduction", "noscript"],
-        "Japan Today" => ['div#article_content p.article_smalltext']
-        }
-      # Only remove unwanted nodes if they're present in the hash.
-      unless unwanted_nodes[@source].nil?
-        unwanted_nodes[@source].each {|node| page.search(node).remove}
-      end
-      page
-    end
-    
-    # Returns the cleaned out body as an array of paragraphs.
-    def clean_article_body
-      # Strip unwanted spaces and newlines.
-      @page.collect {|elt| elt.content.strip.gsub(/\n|\r/, '').gsub(/\ +/, ' ')}
     end
   end
 end
