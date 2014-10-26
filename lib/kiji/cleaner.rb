@@ -11,8 +11,8 @@ module Kiji
     def remove_unwanted_nodes!
       # Search for and remove all unwanted nodes
       unwanted_nodes = {
-        "WSJ"                       => ["span.article-chiclet"],
-        "BBC"                       => ["p.disclaimer", "div.comment-introduction", "noscript"],
+        "WSJ"                       => ['span.article-chiclet'],
+        "BBC"                       => ['p.disclaimer', 'div.comment-introduction', 'noscript'],
         "Japan Today"               => ['div#article_content p.article_smalltext'],
         "South China Morning Post"  => ['div.subtitle', 'div.subline-ticks', 'div.subscribe-wrapper']
       }
@@ -25,7 +25,7 @@ module Kiji
     # Returns the cleaned out body as a string.
     def clean_article_body
       get_source_selectors.each do |selector|
-        if @page.search(selector).any?
+        if @page.search(selector).present?
           @page = page.search(selector)
           break
         end
@@ -52,7 +52,7 @@ module Kiji
         ["div#detail_contents"]
       #when "The Economist"
       when "The Guardian"
-        ["div.article-body-blocks p"]
+        ['div[itemprop="articleBody"] p', 'div.flexible-content-body p']
       when "The Japan Times"
         ['div#jtarticle p']
       when "The Japan Daily Press"
