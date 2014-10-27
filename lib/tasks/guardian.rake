@@ -12,7 +12,7 @@ namespace :scrape do
     feeds.each do |feed|
       worker = Kiji::Worker.new(
         :rss => feed,
-        :regexes => [/(^http.*)/])
+        :regexes => [/(^.*?theguardian\.com((?!\/gallery\/|\/video\/).)*$)/])
       worker.fetch_rss_data
       worker.add_to_db
     end

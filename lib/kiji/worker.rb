@@ -21,14 +21,23 @@ module Kiji
       socializer = Kiji::Socializer.new
       
       feed.entries.each do |entry|
+        
         begin
           if entry.published.nil?
-            puts "There is no published data for this feed entry.\nSkipping..."
+            puts "\nThere is no published data for this feed entry. Skipping..."
+            next
+          elsif !entry.published.today?
+            puts "\nThe entry was not published today. Skipping..."
             next
           end
-          next unless entry.published.today?
-          
+
           url = get_matching_url(entry)
+          # We will only get a nil url if the entry's url does not match
+          # our @regexes.
+          if url.nil?
+            puts "\nThe url does not match our regular expressions. Skipping..."
+            next
+          end
           
           socializer.tw_url = url
           socializer.fb_urls << url
@@ -69,7 +78,9 @@ module Kiji
           article.save
         end
       else
-        puts "No visited hash present. You might want to run the fetch_rss_data method first."
+        puts "\nNOTE:\tNo visited hash present for #{@rss}."
+        puts "\tYou might want to run the fetch_rss_data method first."
+        puts "\tAlternately, this might mean there were no matched regexes for this particualr feed.\n"
       end
     end
     
@@ -81,8 +92,8 @@ module Kiji
       # Ignore the first entry (full url), compact nil results and return the match.
       entry = outliers.any? {|outlier| entry.url.include?(outlier)} ? entry.entry_id : entry.url
       entry.match(Regexp.union(@regexes))
-      # $+ contains the last successful pattern match.
-      $+
+      # Return the complete String that matched the last Regexp, or nil if the match failed. 
+      $&
     end
     
     def format_source(src)
