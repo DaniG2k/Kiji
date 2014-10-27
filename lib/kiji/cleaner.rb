@@ -12,7 +12,7 @@ module Kiji
       # Search for and remove all unwanted nodes
       unwanted_nodes = {
         "WSJ"                       => ['span.article-chiclet'],
-        "BBC"                       => ['p.disclaimer', 'div.comment-introduction', 'noscript'],
+        "BBC"                       => ['p.media-message', 'p.date', 'p.disclaimer', 'div.comment-introduction', 'noscript'],
         "Japan Today"               => ['div#article_content p.article_smalltext'],
         "South China Morning Post"  => ['div.subtitle', 'div.subline-ticks', 'div.subscribe-wrapper']
       }
