@@ -43,7 +43,7 @@ module Kiji
           socializer.fb_urls << url
           
           puts "Querying #{url}"
-          @visited[url] = {}
+          @visited[url] = Hash.new
           @visited[url][:source] = format_source(feed.title)
           @visited[url][:title] = entry.title.strip
           @visited[url][:tweets] = socializer.get_tweets
