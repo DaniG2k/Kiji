@@ -3,7 +3,7 @@ namespace :scrape do
   task :cnn => :environment do
     worker = Kiji::Worker.new(
       :rss => "http://rss.cnn.com/rss/edition_asia.rss",
-      :regexes => [/(^.*cnn\.com.*$)/])
+      :regexes => [/(^.*cnn\.com((?!\/video\/).)*$)/])
     worker.fetch_rss_data
     worker.add_to_db
   end
