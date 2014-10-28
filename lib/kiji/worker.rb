@@ -12,7 +12,7 @@ module Kiji
     def fetch_rss_data
       failure_callback = lambda do |curl, err|
         # Remove the lock file.
-        Kiji::Locker.new.unlock
+        Kiji::Locker.new.clear_lock
         # Email failure message.
         RakeMailer.failed_rake_task(method: "fetch_rss_data", rss: @rss, curl: curl, error: err).deliver
       end
@@ -24,10 +24,10 @@ module Kiji
         
         begin
           if entry.published.nil?
-            puts "\nThere is no published data for this feed entry. Skipping..."
+            puts "There is no published data for this feed entry. Skipping..."
             next
           elsif !entry.published.today?
-            puts "\nThe entry was not published today. Skipping..."
+            puts "The entry was not published today. Skipping..."
             next
           end
 

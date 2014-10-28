@@ -14,7 +14,7 @@ module Kiji
       end
     end
     
-    def unlock
+    def clear_lock
       if File.exist?(@lock_file)
         puts "Removing lock file."
         File.delete(@lock_file)
