@@ -3,7 +3,7 @@ production:
     hostname: localhost
     port: 8983
     log_level: WARNING
-    path: /solr/default
+    path: /solr/kiji_default
     solr_home: solr
     # read_timeout: 2
     # open_timeout: 0.5
@@ -14,7 +14,7 @@ development:
     port: 8982
     log_level: INFO
     solr_home: solr
-    path: /solr/development
+    path: /solr/kiji_development
 
 test:
   solr:
@@ -22,5 +22,5 @@ test:
     port: 8981
     log_level: WARNING
     solr_home: solr
-    path: /solr/test
+    path: /solr/kiji_test
     
