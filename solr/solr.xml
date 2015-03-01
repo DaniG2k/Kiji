@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <solr persistent="false">
   <cores adminPath="/admin/cores" host="${host:}" hostPort="${jetty.port:}">
-    <core name="kiji_default"     instanceDir="." dataDir="kiji_default/data"/>
-    <core name="kiji_development" instanceDir="." dataDir="kiji_development/data"/>
-    <core name="kiji_test"        instanceDir="." dataDir="kiji_test/data"/>
+    <core name="kiji_prod"     instanceDir="." dataDir="kiji_prod/data"/>
+    <core name="asiagazette_prod" instanceDir="." dataDir="asiagazette_prod/data"/>
   </cores>
 </solr>
