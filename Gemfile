@@ -31,22 +31,21 @@ end
 
 group :production do
   gem 'passenger'
+  gem 'pg'
 end
 
 group :development, :test do
-  # Use sqlite3 as the database for Active Record
   gem 'sqlite3'
   gem 'bullet'
-  gem 'sunspot_solr'
 end
 
-gem 'pg'
 gem 'pry'
 gem 'whenever', :require => false
 gem 'mechanize'
 gem 'feedjira'
 
 # Sunspot
+gem 'sunspot_solr'
 gem 'sunspot_rails'
 gem 'progress_bar'
 
