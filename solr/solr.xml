@@ -2,6 +2,5 @@
 <solr persistent="false">
   <cores adminPath="/admin/cores" host="${host:}" hostPort="${jetty.port:}">
     <core name="kiji_prod"     instanceDir="." dataDir="kiji_prod/data"/>
-    <core name="asiagazette_prod" instanceDir="." dataDir="asiagazette_prod/data"/>
   </cores>
 </solr>
