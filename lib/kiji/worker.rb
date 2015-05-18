@@ -1,4 +1,10 @@
 module Kiji
+  
+  require 'json'
+  require 'open-uri'
+  require 'feedjira'
+  require 'mechanize'
+
   class Worker
     # TODO
     # - Build a worker that goes through all articles to assemble data
