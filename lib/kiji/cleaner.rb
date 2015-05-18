@@ -43,7 +43,7 @@ module Kiji
       when "BBC"
         ["div.story-body p", "div.map-body p"]
       when "CNN"
-        ["div.cnn_strycntntlft p"]
+        ["section#body-text p"]
       when "Chosun Ilbo"
         ["div.article p"]
       when "New York Times"
