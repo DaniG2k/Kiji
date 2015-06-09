@@ -129,7 +129,7 @@ GEM
       mini_portile (~> 0.6.0)
     ntlm-http (0.1.1)
     options (2.3.2)
-    passenger (5.0.9)
+    passenger (5.0.7)
       rack
       rake (>= 0.8.1)
     pg (0.18.2)
@@ -249,7 +249,7 @@ DEPENDENCIES
   jquery-rails
   jquery-ui-rails
   mechanize
-  passenger
+  passenger (= 5.0.7)
   pg
   poltergeist
   progress_bar

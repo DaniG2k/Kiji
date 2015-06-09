@@ -30,7 +30,7 @@ group :doc do
 end
 
 group :production do
-  gem 'passenger'
+  gem 'passenger', '5.0.7'
   gem 'pg'
 end
 
