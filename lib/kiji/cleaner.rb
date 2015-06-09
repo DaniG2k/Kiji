@@ -14,7 +14,8 @@ module Kiji
         "WSJ"                       => ['span.article-chiclet'],
         "BBC"                       => ['p.media-message', 'p.date', 'p.disclaimer', 'div.comment-introduction', 'noscript'],
         "Japan Today"               => ['div#article_content p.article_smalltext'],
-        "South China Morning Post"  => ['div.subtitle', 'div.subline-ticks', 'div.subscribe-wrapper']
+        "South China Morning Post"  => ['div.subtitle', 'div.subline-ticks', 'div.subscribe-wrapper'],
+        "Tokyo Reporter"            => ['p.posttags', 'div.single_postmeta', 'div.sharedaddy']
       }
       # Only remove unwanted nodes if they're present in the hash.
       if unwanted_nodes[@source].present?
@@ -62,7 +63,7 @@ module Kiji
       when "South China Morning Post"
         ['[property="content:encoded"] p']
       when "Tokyo Reporter"
-        ["div.post p"]
+        ["div.entry-content p"]
       when "WSJ"
         ["div.articleBody p", "article.articleBody p"]
       else
