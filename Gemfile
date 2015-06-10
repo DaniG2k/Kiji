@@ -42,7 +42,7 @@ end
 gem 'pry'
 gem 'whenever', :require => false
 gem 'mechanize'
-gem 'feedjira'
+gem 'feedjira', '< 2.0.0'
 
 # Sunspot
 gem 'sunspot_solr'
