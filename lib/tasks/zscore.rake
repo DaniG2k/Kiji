@@ -6,7 +6,7 @@ namespace :scrape do
     start_time = Time.zone.now
     
     begin
-      sources = Article.pluck(:source).uniq
+      sources = Article.pluck(:source).uniq.sort
       sources.each do |src|
         articles = Article.where(:source => src)
         urls = articles.pluck(:url)
