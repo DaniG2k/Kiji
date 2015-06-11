@@ -42,11 +42,11 @@ end
 gem 'pry'
 gem 'whenever', :require => false
 gem 'mechanize'
-gem 'feedjira', '< 2.0.0'
+gem 'feedjira'
 
 # Sunspot
-gem 'sunspot_solr'
 gem 'sunspot_rails'
+gem 'sunspot_solr'
 gem 'progress_bar'
 
 gem 'capybara'

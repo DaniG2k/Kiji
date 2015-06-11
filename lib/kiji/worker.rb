@@ -16,13 +16,14 @@ module Kiji
     end
     
     def fetch_rss_data
-      failure_callback = lambda do |curl, err|
+      #failure_callback = lambda do |curl, err|
         # Remove the lock file.
-        Kiji::Locker.new.clear_lock
+      #  Kiji::Locker.new.clear_lock
         # Email failure message.
-        RakeMailer.failed_rake_task(method: "fetch_rss_data", rss: @rss, curl: curl, error: err).deliver
-      end
-      feed = Feedjira::Feed.fetch_and_parse(@rss, on_failure: failure_callback)
+      #  RakeMailer.failed_rake_task(method: "fetch_rss_data", rss: @rss, curl: curl, error: err).deliver
+      #end
+      feed = Feedjira::Feed.fetch_and_parse @rss
+
       @visited = Hash.new
       socializer = Kiji::Socializer.new
       
