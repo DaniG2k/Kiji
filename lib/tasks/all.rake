@@ -6,7 +6,7 @@ namespace :scrape do
                 :bbc,
                 :chosun,
                 :cnn,
-                :economist,
+                #:economist,
                 :guardian,
                 :japantimes,
                 :japantoday,
