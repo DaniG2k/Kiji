@@ -54,10 +54,9 @@ module Kiji
       end
     rescue NoMethodError => err
         # Email failure message.
-        RakeMailer.failed_rake_task(method: "fetch_rss_data", rss: @rss, error: err).deliver
+        RakeMailer.failed_rake_task(method: "fetch_rss_data", rss: @rss, curl: nil, error: err).deliver
     rescue Exception => ex
         puts ex.message
-        next
     ensure
         # Remove the lock file.
         Kiji::Locker.new.clear_lock

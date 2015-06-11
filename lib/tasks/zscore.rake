@@ -17,7 +17,6 @@ namespace :scrape do
         # place inside an array. Else, compute the zscore.
         zscores = raw_scores.one? ? [-3.0] : raw_scores.zscore
         zscores.each_with_index {|zscore, i| Article.find_by(:url => urls[i]).update(:val => zscore)}
-    end
     rescue Exception => e
       RakeMailer.failed_rake_task(method: "zscore", rss: nil, curl: nil, error: e).deliver
     end
