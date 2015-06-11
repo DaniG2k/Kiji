@@ -16,58 +16,53 @@ module Kiji
     end
     
     def fetch_rss_data
-      begin
-        feed = Feedjira::Feed.fetch_and_parse @rss
-      rescue NoMethodError => err
-        # Email failure message.
-        RakeMailer.failed_rake_task(method: "fetch_rss_data", rss: @rss, error: err).deliver
-      ensure
-        # Remove the lock file.
-        Kiji::Locker.new.clear_lock
-      end
+      feed = Feedjira::Feed.fetch_and_parse @rss
 
       @visited = Hash.new
       socializer = Kiji::Socializer.new
       
       feed.entries.each do |entry|
-        begin
-          if entry.published.nil?
-            puts "There is no published data for this feed entry. Skipping..."
-            next
-          elsif !entry.published.today?
-            puts "The entry was not published today. Skipping..."
-            next
-          end
-
-          url = get_matching_url(entry)
-          # We will only get a nil url if the entry's url does not match
-          # our @regexes.
-          if url.nil?
-            puts "\nThe url does not match our regular expressions. Skipping..."
-            next
-          end
-          
-          socializer.tw_url = url
-          socializer.fb_urls << url
-          
-          puts "Querying #{url}"
-          @visited[url] = Hash.new
-          @visited[url][:source] = format_source(feed.title)
-          @visited[url][:title] = entry.title.strip
-          @visited[url][:tweets] = socializer.get_tweets
-        rescue Exception => e
-          puts e.message
-          #puts "\nNo matchdata found for #{entry.url}"
+        if entry.published.nil?
+          puts "There is no published data for this feed entry. Skipping..."
+          next
+        elsif !entry.published.today?
+          puts "The entry was not published today. Skipping..."
           next
         end
+
+        url = get_matching_url(entry)
+        # We will only get a nil url if the entry's url does not match
+        # our @regexes.
+        if url.nil?
+          puts "\nThe url does not match our regular expressions. Skipping..."
+          next
+        end
+          
+        socializer.tw_url = url
+        socializer.fb_urls << url
+          
+        puts "Querying #{url}"
+        @visited[url] = Hash.new
+        @visited[url][:source] = format_source(feed.title)
+        @visited[url][:title] = entry.title.strip
+        @visited[url][:tweets] = socializer.get_tweets
       end # end feed.entries.each
       
       if socializer.fb_urls.present?
         # Process Facebook likes in batch.
         socializer.get_likes.each {|fb| @visited["#{fb['url']}"][:likes] = fb['total_count']}
       end
-    end # end fetch_rss_data 
-    
+    rescue NoMethodError => err
+        # Email failure message.
+        RakeMailer.failed_rake_task(method: "fetch_rss_data", rss: @rss, error: err).deliver
+    rescue Exception => ex
+        puts ex.message
+        next
+    ensure
+        # Remove the lock file.
+        Kiji::Locker.new.clear_lock
+    end
+
     def add_to_db
       # Only add to database if links were visited.
       if @visited.present?
