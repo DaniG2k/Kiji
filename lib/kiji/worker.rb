@@ -16,19 +16,20 @@ module Kiji
     end
     
     def fetch_rss_data
-      #failure_callback = lambda do |curl, err|
-        # Remove the lock file.
-      #  Kiji::Locker.new.clear_lock
+      begin
+        feed = Feedjira::Feed.fetch_and_parse @rss
+      rescue NoMethodError => err
         # Email failure message.
-      #  RakeMailer.failed_rake_task(method: "fetch_rss_data", rss: @rss, curl: curl, error: err).deliver
-      #end
-      feed = Feedjira::Feed.fetch_and_parse @rss
+        RakeMailer.failed_rake_task(method: "fetch_rss_data", rss: @rss, error: err).deliver
+      ensure
+        # Remove the lock file.
+        Kiji::Locker.new.clear_lock
+      end
 
       @visited = Hash.new
       socializer = Kiji::Socializer.new
       
       feed.entries.each do |entry|
-        
         begin
           if entry.published.nil?
             puts "There is no published data for this feed entry. Skipping..."
