@@ -51,7 +51,8 @@ module Kiji
         ["p.story-content", "p.story-body-text"]
       when "Nippon.com"
         ["div#detail_contents"]
-      #when "The Economist"
+      when "The Economist"
+        ['div[itemprop="articleBody"] p']
       when "The Guardian"
         ['div[itemprop="articleBody"] p', 'div.flexible-content-body p']
       when "The Japan Times"
